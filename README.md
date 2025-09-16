@@ -24,4 +24,38 @@ It provides students, teachers, and administrators with an intuitive dashboard t
 - **Auto Contact Support** option in sidebars for quick help.  
 
 ## 📂 Project Structure  
+├── admin-dashboard.html # Admin panel dashboard
+├── academic-performance.html # Student performance page
+├── attendance-report.html # Student attendance records
+├── college-timetable.html # Weekly timetable + notifications
+├── chat-with-faculty.html # Messaging module
+├── app.js # Login features (password toggle, language)
+├── styles.css # Shared stylesheet (linked in pages)
+└── index.html # (Not uploaded, assumed login/home page)
+
+
+
+## 🖼️ Tech Stack  
+
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)  
+- **UI Frameworks**: Font Awesome (icons), Google Fonts (Inter, Poppins)  
+- **Charts & Graphs**: [Chart.js](https://www.chartjs.org/)  
+- **Design**: Responsive, modern dashboards with light/dark modes  
+
+## ⚙️ Setup Instructions  
+
+1. Clone or download the repository.  
+2. Open any `.html` file (e.g., `index.html` or `admin-dashboard.html`) in your browser.  
+3. No backend required – this is a static prototype.  
+
+> To connect with a backend (Node.js, Django, etc.), APIs can be added for dynamic data such as student records, attendance, and fee tracking.  
+
+## 📌 Future Scope  
+
+- Authentication & role-based access (Admin / Student / Teacher).  
+- Database integration for real student/teacher data.  
+- Real-time chat and notifications.  
+- Exportable reports (CSV/PDF).  
+- Integration with payment gateways for fee collection.  
+
 
