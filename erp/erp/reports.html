@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Reports | ZENED ERP</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #f5f6fa;
+            color: #23242B;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        }
+        
+        .dashboard-root {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.2rem 1.2rem 1.2rem;
+            min-height: 100vh;
+            box-shadow: 2px 0 16px 0 #2563eb11;
+            border-right: 1.5px solid #e5e7eb;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #2563eb;
+            margin-bottom: 2.2rem;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .institution-name {
+            font-size: 1.08rem;
+            font-weight: 600;
+            margin-bottom: 2.2rem;
+            opacity: 0.92;
+            color: #1746a0;
+        }
+        
+        .sidebar nav {
+            flex: 1;
+        }
+        
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 1.08rem;
+            font-weight: 500;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.8rem;
+            margin-bottom: 0.3rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        
+        .sidebar nav a.active,
+        .sidebar nav a:hover {
+            background: #2563eb;
+            color: #fff;
+        }
+        
+        .sidebar .logout {
+            margin-top: 2rem;
+            color: #fff;
+            background: #2563eb;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            padding: 0.7rem 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .sidebar .logout:hover {
+            background: #1746a0;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 2.5rem 3.5vw;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2.2rem;
+        }
+        
+        .admin-header .admin-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1746a0;
+        }
+        
+        .dashboard-cards {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: flex-start;
+            margin-bottom: 2.5rem;
+        }
+        
+        .dashboard-card {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+            padding: 2rem 2.5rem;
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.7rem;
+            border: 1.5px solid #e5e7eb;
+        }
+        
+        .dashboard-card .summary-title {
+            font-size: 1.1rem;
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        
+        .dashboard-card .summary-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #23242B;
+        }
+        
+        .dashboard-card .summary-desc {
+            font-size: 0.98rem;
+            color: #666;
+            opacity: 0.85;
+        }
+        
+        .charts-row {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+        
+        .chart-card {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+            padding: 1.2rem 1.2rem;
+            min-width: 220px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1.5px solid #e5e7eb;
+        }
+        
+        .chart-title {
+            font-size: 1.08rem;
+            color: #2563eb;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .reports-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2.5rem;
+            background: #fff;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+        }
+        
+        .reports-table th,
+        .reports-table td {
+            padding: 0.9rem 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .reports-table th {
+            background: #f5f6fa;
+            color: #2563eb;
+            font-weight: 700;
+        }
+        
+        .reports-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        @media (max-width: 1100px) {
+            .dashboard-cards,
+            .charts-row {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            .main-content {
+                padding: 1.2rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-root">
+        <aside class="sidebar">
+            <div class="logo" style="display:flex; align-items:center; gap:0.7rem;">
+                <span class="zened-logo-svg" style="display:flex; align-items:center;">
+                    <svg width="38" height="38" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="22" fill="#2563eb" stroke="#fff" stroke-width="4"/>
+                        <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="'Poppins', 'Inter', Arial, sans-serif" font-size="22" font-weight="bold" dy=".3em">Z</text>
+                    </svg>
+                </span>
+                <span class="brand-title" style="font-size:1.3rem; font-weight:500; color:#fff; letter-spacing:0.01em;">ZEN<span class="accent" style="color:#2563eb;">ED</span></span>
+            </div>
+            <div class="institution-name" id="institutionNameSidebar"></div>
+            <nav>
+                <a href="admin-dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+                <a href="manage-students.html"><i class="fa fa-users"></i> Manage Students</a>
+                <a href="manage-teachers.html"><i class="fa fa-chalkboard-teacher"></i> Manage Teachers</a>
+                <a href="reports.html" class="active"><i class="fa fa-chart-bar"></i> Reports</a>
+                <a href="#"><i class="fa fa-cog"></i> Settings</a>
+            </nav>
+            <button class="logout"><i class="fa fa-sign-out-alt"></i> Logout</button>
+        </aside>
+        <main class="main-content">
+            <div class="admin-header">
+                <div class="admin-title">Institution Reports</div>
+                <div class="admin-profile">
+                    <div class="admin-profile-icon" style="width:44px;height:44px;border-radius:50%;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:700;box-shadow:0 2px 8px 0 #2563eb22;"><i class="fa fa-user-shield"></i></div>
+                </div>
+            </div>
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <div class="summary-title">Total Students</div>
+                    <div class="summary-value">120</div>
+                    <div class="summary-desc">Currently enrolled</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Total Teachers</div>
+                    <div class="summary-value">18</div>
+                    <div class="summary-desc">Faculty members</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Attendance Rate</div>
+                    <div class="summary-value">92%</div>
+                    <div class="summary-desc">This month</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Fees Collected</div>
+                    <div class="summary-value">₹4,50,000</div>
+                    <div class="summary-desc">This year</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Dropouts</div>
+                    <div class="summary-value">5</div>
+                    <div class="summary-desc">This academic year</div>
+                </div>
+            </div>
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="chart-title"><i class="fa fa-user-plus"></i> Admissions Trend</div>
+                    <canvas id="admissionsChart" width="320" height="120"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title"><i class="fa fa-user-check"></i> Attendance Overview</div>
+                    <canvas id="attendanceChart" width="320" height="120"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title"><i class="fa fa-rupee-sign"></i> Fee Collection</div>
+                    <canvas id="feeCollectionChart" width="320" height="120"></canvas>
+                </div>
+            </div>
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="chart-title"><i class="fa fa-chart-pie"></i> Academic Performance</div>
+                    <canvas id="performanceChart" width="320" height="320"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title"><i class="fa fa-user-times"></i> Dropout/Withdrawal</div>
+                    <canvas id="dropoutChart" width="320" height="120"></canvas>
+                </div>
+            </div>
+            <table class="reports-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Roll No</th>
+                        <th>Class</th>
+                        <th>Attendance %</th>
+                        <th>Fees Paid</th>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Aarav Sharma</td>
+                        <td>21CS1001</td>
+                        <td>CS-A</td>
+                        <td>95%</td>
+                        <td>₹40,000</td>
+                        <td>88%</td>
+                    </tr>
+                    <tr>
+                        <td>Priya Singh</td>
+                        <td>21CS1002</td>
+                        <td>CS-B</td>
+                        <td>91%</td>
+                        <td>₹40,000</td>
+                        <td>85%</td>
+                    </tr>
+                    <tr>
+                        <td>Rahul Verma</td>
+                        <td>21CS1003</td>
+                        <td>CS-A</td>
+                        <td>89%</td>
+                        <td>₹35,000</td>
+                        <td>82%</td>
+                    </tr>
+                    <tr>
+                        <td>Simran Kaur</td>
+                        <td>21CS1004</td>
+                        <td>CS-C</td>
+                        <td>97%</td>
+                        <td>₹42,000</td>
+                        <td>91%</td>
+                    </tr>
+                    <tr>
+                        <td>Vikram Patel</td>
+                        <td>21CS1005</td>
+                        <td>CS-B</td>
+                        <td>93%</td>
+                        <td>₹40,000</td>
+                        <td>87%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Show institution name from localStorage
+        const instName = localStorage.getItem('institutionName') || 'Your Institution';
+        document.getElementById('institutionNameSidebar').textContent = instName;
+        // Admissions Trend Chart
+        new Chart(document.getElementById('admissionsChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                datasets: [{
+                    label: 'Admissions',
+                    data: [10, 15, 18, 20, 14, 16, 12, 15],
+                    backgroundColor: '#2563eb',
+                    borderRadius: 8,
+                    maxBarThickness: 32
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#1746a0'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+        // Attendance Overview Chart
+        new Chart(document.getElementById('attendanceChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Present', 'Absent'],
+                datasets: [{
+                    data: [92, 8],
+                    backgroundColor: ['#2563eb', '#e5e7eb'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                cutout: '70%',
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+        // Fee Collection Trend Line Chart
+        new Chart(document.getElementById('feeCollectionChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Fees Collected',
+                    data: [120000, 135000, 128000, 140000, 150000, 145000, 160000],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16,185,129,0.08)',
+                    tension: 0.3,
+                    fill: true,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#10b981',
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#1746a0',
+                            callback: v => '₹' + v.toLocaleString()
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+        // Academic Performance Pie Chart
+        const perfScores = [88, 92, 85, 90, 80];
+        const perfLabels = ['Data Structures', 'Algorithms', 'DBMS', 'OS', 'Networks'];
+        const perfAvg = Math.round(perfScores.reduce((a, b) => a + b, 0) / perfScores.length);
+        new Chart(document.getElementById('performanceChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: perfLabels,
+                datasets: [{
+                    data: perfScores,
+                    backgroundColor: [
+                        '#2563eb',
+                        '#facc15',
+                        '#10b981',
+                        '#ef4444',
+                        '#a78bfa'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: '#bfc9da',
+                            font: {
+                                size: 15
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true
+                    },
+                }
+            }
+        });
+        // Dropout/Withdrawal Trend Pie Chart
+        new Chart(document.getElementById('dropoutChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['Dropouts', 'Withdrawals', 'Active'],
+                datasets: [{
+                    data: [5, 3, 112],
+                    backgroundColor: ['#ef4444', '#facc15', '#2563eb'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+
+</html>

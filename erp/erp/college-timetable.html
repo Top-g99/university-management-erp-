@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College Timetable | ZENED</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #181A20;
+            color: #fff;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        
+        .dashboard-root {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #23242B;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.2rem 1.2rem 1.2rem;
+            min-height: 100vh;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar nav {
+            flex: 1;
+        }
+        
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #bfc9da;
+            text-decoration: none;
+            font-size: 1.08rem;
+            font-weight: 500;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.8rem;
+            margin-bottom: 0.3rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        
+        .sidebar nav a.active,
+        .sidebar nav a:hover {
+            background: #2563eb;
+            color: #fff;
+        }
+        
+        .sidebar .support-btn {
+            margin-top: auto;
+            background: #2563eb;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 0.9rem;
+            text-align: center;
+            padding: 0.45rem 0;
+            font-size: 1.01rem;
+            display: block;
+        }
+        
+        .main-content {
+            flex: 1;
+            background: #181A20;
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .timetable-header {
+            background: #282A36;
+            border-radius: 1.2rem;
+            padding: 1.2rem 2rem;
+            margin-bottom: 2.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px 0 rgba(37, 99, 235, 0.08);
+        }
+        
+        .timetable-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+        
+        .timetable-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #23242B;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            box-shadow: 0 2px 12px 0 rgba(37, 99, 235, 0.08);
+        }
+        
+        .timetable-table th,
+        .timetable-table td {
+            padding: 1rem 1.2rem;
+            text-align: center;
+            font-size: 1.08rem;
+        }
+        
+        .timetable-table th {
+            background: #2563eb;
+            color: #fff;
+            font-weight: 700;
+        }
+        
+        .timetable-table tr:nth-child(even) td {
+            background: #23242B;
+        }
+        
+        .timetable-table tr:nth-child(odd) td {
+            background: #20212a;
+        }
+        
+        .timetable-table td {
+            color: #e0e7ff;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                padding: 1.2rem 0.5rem;
+            }
+            .timetable-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+        
+        .tt-date {
+            color: #bfc9da;
+            font-size: 0.98rem;
+            font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-root">
+        <aside class="sidebar" style="display:flex; flex-direction:column; height:100vh;">
+            <div class="logo" style="display:flex; align-items:center; gap:0.7rem;">
+                <span class="zened-logo-svg" style="display:flex; align-items:center;">
+                <svg width="38" height="38" viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="22" fill="#2563eb" stroke="#fff" stroke-width="4"/>
+                    <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="'Poppins', 'Inter', Arial, sans-serif" font-size="22" font-weight="bold" dy=".3em">Z</text>
+                </svg>
+            </span>
+                <span class="brand-title" style="font-family:'Poppins', 'Inter', Arial, sans-serif; font-weight:700; font-size:1.7rem; color:#1a3cff; letter-spacing:0.04em;">ZEN<span class="accent" style="color:#2563eb; font-family:inherit;">ED</span></span>
+            </div>
+            <nav style="flex:1 1 auto;">
+                <a href="student-dashboard.html"><i class="fa fa-th-large"></i> Dashboard</a>
+                <a href="college-timetable.html" class="active"><i class="fa fa-calendar-alt"></i> College Timetable</a>
+                <a href="attendance-report.html"><i class="fa fa-user-check"></i> Attendance</a>
+                <a href="academic-performance.html"><i class="fa fa-chart-pie"></i> Academic Performance</a>
+                <a href="fees-payment.html"><i class="fa fa-rupee-sign"></i> Fees Payment</a>
+                <a href="index.html"><i class="fa fa-sign-out-alt"></i> Logout</a>
+            </nav>
+            <a href="#contact-support" class="support-btn"><i class="fa fa-headset"></i> Auto Contact Support</a>
+        </aside>
+        <main class="main-content">
+            <div class="timetable-header">
+                <div class="timetable-title">College Timetable</div>
+                <div id="timetable-date" style="color:#bfc9da; font-size:1.08rem; font-weight:500;"></div>
+            </div>
+            <table class="timetable-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Monday<br><span class="tt-date" id="tt-mon-date"></span></th>
+                        <th>Tuesday<br><span class="tt-date" id="tt-tue-date"></span></th>
+                        <th>Wednesday<br><span class="tt-date" id="tt-wed-date"></span></th>
+                        <th>Thursday<br><span class="tt-date" id="tt-thu-date"></span></th>
+                        <th>Friday<br><span class="tt-date" id="tt-fri-date"></span></th>
+                        <th>Saturday<br><span class="tt-date" id="tt-sat-date"></span></th>
+                        <th>Sunday<br><span class="tt-date" id="tt-sun-date"></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>9:00 - 10:00</td>
+                        <td>Mathematics</td>
+                        <td>Physics</td>
+                        <td>CS</td>
+                        <td>Mathematics</td>
+                        <td>CS</td>
+                        <td>Elective</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:00 - 11:00</td>
+                        <td>Physics</td>
+                        <td>Mathematics</td>
+                        <td>DBMS</td>
+                        <td>CS</td>
+                        <td>Physics</td>
+                        <td>Elective</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>11:15 - 12:15</td>
+                        <td>CS</td>
+                        <td>DBMS</td>
+                        <td>Mathematics</td>
+                        <td>Elective</td>
+                        <td>DBMS</td>
+                        <td>Mathematics</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>12:15 - 1:00</td>
+                        <td>English</td>
+                        <td>CS</td>
+                        <td>Physics</td>
+                        <td>English</td>
+                        <td>Elective</td>
+                        <td>CS</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top:2.5rem; background:#23242B; border-radius:1.2rem; box-shadow:0 2px 12px 0 rgba(37,99,235,0.08); padding:2rem 1.5rem;">
+                <div style="font-size:1.18rem; font-weight:700; color:#fff; margin-bottom:1.2rem; letter-spacing:0.02em;">Class-wise Period Distribution</div>
+                <canvas id="timetableAnalyticsChart" height="120"></canvas>
+            </div>
+            <div style="margin-top:2rem; background:#23242B; border-radius:1.2rem; box-shadow:0 2px 12px 0 rgba(37,99,235,0.10); padding:0; width:100%; max-width:none; margin-left:0; margin-right:0;">
+                <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #35374a; padding:0.7rem 1.2rem 0.5rem 1.2rem;">
+                    <div style="font-size:1.13rem; font-weight:700; color:#fff;">Notifications</div>
+                    <a href="#" style="color:#facc15; font-size:0.98rem; font-weight:600; text-decoration:none;">Mark all as read</a>
+                </div>
+                <div style="padding:0.5rem 1.2rem 0.1rem 1.2rem; color:#bfc9da; font-size:0.98rem; font-weight:600;">Today</div>
+                <div style="padding:0.1rem 0 0.4rem 0;">
+                    <div style="display:flex; align-items:flex-start; gap:0.8rem; border-bottom:1px solid #35374a; padding:0.7rem 1.2rem 0.7rem 1.2rem; background:#282A36;">
+                        <div style="background:#2d2f3a; border-radius:50%; width:1.7rem; height:1.7rem; display:flex; align-items:center; justify-content:center;"><i class="fa fa-sync-alt" style="color:#facc15; font-size:1rem;"></i></div>
+                        <div style="flex:1;">
+                            <div style="font-weight:600; color:#fff;">Timetable Updated</div>
+                            <div style="font-size:0.98rem; color:#bfc9da; margin-top:0.1rem;">The timetable was last updated <b>2 days ago</b>. Please check for new changes.</div>
+                        </div>
+                        <div style="color:#bfc9da; font-size:0.93rem; margin-left:0.7rem; white-space:nowrap;">2d ago</div>
+                    </div>
+                    <div style="display:flex; align-items:flex-start; gap:0.8rem; border-bottom:1px solid #35374a; padding:0.7rem 1.2rem 0.7rem 1.2rem; background:#282A36;">
+                        <div style="background:#393a4a; border-radius:50%; width:1.7rem; height:1.7rem; display:flex; align-items:center; justify-content:center;"><i class="fa fa-umbrella-beach" style="color:#facc15; font-size:1rem;"></i></div>
+                        <div style="flex:1;">
+                            <div style="font-weight:600; color:#fff;">Upcoming Holiday</div>
+                            <div style="font-size:0.98rem; color:#bfc9da; margin-top:0.1rem;">No classes on <b>July 21, 2024</b> (Sunday) due to <b>University Foundation Day</b>.</div>
+                        </div>
+                        <div style="color:#bfc9da; font-size:0.93rem; margin-left:0.7rem; white-space:nowrap;">in 5d</div>
+                    </div>
+                    <div style="display:flex; align-items:flex-start; gap:0.8rem; padding:0.7rem 1.2rem 0.7rem 1.2rem; background:#282A36;">
+                        <div style="background:#1e293b; border-radius:50%; width:1.7rem; height:1.7rem; display:flex; align-items:center; justify-content:center;"><i class="fa fa-flag" style="color:#10b981; font-size:1rem;"></i></div>
+                        <div style="flex:1;">
+                            <div style="font-weight:600; color:#fff;">Next Holiday</div>
+                            <div style="font-size:0.98rem; color:#bfc9da; margin-top:0.1rem;">Next holiday: <b>Independence Day</b> on <b>August 15, 2024</b>.</div>
+                        </div>
+                        <div style="color:#bfc9da; font-size:0.93rem; margin-left:0.7rem; white-space:nowrap;">in 25d</div>
+                    </div>
+                </div>
+                <div style="border-top:1px solid #35374a; padding:0.5rem 1.2rem; text-align:right;">
+                    <a href="#" style="color:#facc15; font-size:0.98rem; font-weight:600; text-decoration:none;">View all notifications</a>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const ctx = document.getElementById('timetableAnalyticsChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Mathematics', 'Physics', 'CS', 'DBMS', 'English', 'Elective'],
+                        datasets: [{
+                            label: 'Number of Periods',
+                            data: [5, 4, 6, 4, 2, 5],
+                            backgroundColor: [
+                                '#2563eb', '#facc15', '#10b981', '#a78bfa', '#ef4444', '#818cf8'
+                            ],
+                            borderRadius: 7
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    color: '#bfc9da'
+                                },
+                                grid: {
+                                    color: '#23242B'
+                                },
+                                barPercentage: 0.2,
+                                categoryPercentage: 0.3
+                            },
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#bfc9da',
+                                    stepSize: 1
+                                },
+                                grid: {
+                                    color: '#23242B'
+                                }
+                            }
+                        }
+                    }
+                });
+                // Add today's date to the timetable header
+                const dateElem = document.getElementById('timetable-date');
+                if (dateElem) {
+                    const today = new Date();
+                    const options = {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    };
+                    dateElem.textContent = today.toLocaleDateString(undefined, options);
+                }
+                // Set timetable header dates for the current week
+                function getMonday(d) {
+                    d = new Date(d);
+                    var day = d.getDay(),
+                        diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+                    return new Date(d.setDate(diff));
+                }
+                const today = new Date();
+                const monday = getMonday(today);
+                const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+                for (let i = 0; i < 7; i++) {
+                    const date = new Date(monday);
+                    date.setDate(monday.getDate() + i);
+                    const elem = document.getElementById(`tt-${days[i]}-date`);
+                    if (elem) {
+                        elem.textContent = date.toLocaleDateString(undefined, {
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                    }
+                }
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

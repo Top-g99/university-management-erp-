@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Profile | ZENED</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #181A20;
+            color: #fff;
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+        }
+        
+        .profile-root {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #23242B;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.2rem 1.2rem 1.2rem;
+            min-height: 100vh;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar nav {
+            flex: 1;
+        }
+        
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #bfc9da;
+            text-decoration: none;
+            font-size: 1.08rem;
+            font-weight: 500;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.8rem;
+            margin-bottom: 0.3rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        
+        .sidebar nav a.active,
+        .sidebar nav a:hover {
+            background: #2563eb;
+            color: #fff;
+        }
+        
+        .main-content {
+            flex: 1;
+            background: #181A20;
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #282A36;
+            border-radius: 1.2rem;
+            padding: 1.2rem 2rem;
+            margin-bottom: 2.2rem;
+            box-shadow: 0 2px 12px 0 rgba(37, 99, 235, 0.08);
+        }
+        
+        .profile-header .title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+        
+        .profile-header .user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .profile-header .user .fa-user-circle {
+            font-size: 2.2rem;
+            color: #bfc9da;
+        }
+        
+        .profile-header .user .name {
+            font-size: 1.08rem;
+            color: #bfc9da;
+        }
+        
+        .profile-header .user .fa-bell {
+            font-size: 1.5rem;
+            color: #facc15;
+            cursor: pointer;
+            background: #23242B;
+            border-radius: 50%;
+            width: 2.4rem;
+            height: 2.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .profile-card {
+            background: #23242B;
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 12px 0 rgba(37, 99, 235, 0.08);
+            padding: 2.2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #2563eb;
+            background: #181A20;
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-info h2 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        .profile-info .roll {
+            color: #bfc9da;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-info .course {
+            color: #2563eb;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-info .contact {
+            color: #bfc9da;
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .edit-btn {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 0.7rem;
+            padding: 0.7rem 1.5rem;
+            font-size: 1.08rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 1rem;
+        }
+        
+        .edit-btn:hover {
+            background: #1a3cff;
+        }
+        
+        .profile-sections {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .profile-section {
+            background: #23242B;
+            border-radius: 1.2rem;
+            padding: 1.5rem 2rem;
+            flex: 1 1 320px;
+            min-width: 320px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px 0 rgba(37, 99, 235, 0.05);
+        }
+        
+        .profile-section h3 {
+            color: #2563eb;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-section table {
+            width: 100%;
+            color: #bfc9da;
+            font-size: 1.05rem;
+            border-collapse: collapse;
+        }
+        
+        .profile-section td {
+            padding: 0.4rem 0.7rem 0.4rem 0;
+        }
+        
+        @media (max-width: 900px) {
+            .profile-card,
+            .profile-sections {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            .main-content {
+                padding: 1.2rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-root">
+        <aside class="sidebar" style="display:flex; flex-direction:column; height:100vh;">
+            <div class="logo" style="display:flex; align-items:center; gap:0.7rem;">
+                <span class="zened-logo-svg" style="display:flex; align-items:center;">
+                    <svg width="38" height="38" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="22" fill="#2563eb" stroke="#fff" stroke-width="4"/>
+                        <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="'Poppins', 'Inter', Arial, sans-serif" font-size="22" font-weight="bold" dy=".3em">Z</text>
+                    </svg>
+                </span>
+                <span class="brand-title" style="font-family:'Poppins', 'Inter', Arial, sans-serif; font-weight:700; font-size:1.7rem; color:#1a3cff; letter-spacing:0.04em;">ZEN<span class="accent" style="color:#2563eb; font-family:inherit;">ED</span></span>
+            </div>
+            <nav style="flex:1 1 auto;">
+                <a href="student-dashboard.html"><i class="fa fa-th-large"></i> Dashboard</a>
+                <a href="college-timetable.html"><i class="fa fa-calendar-alt"></i> College Timetable</a>
+                <a href="attendance-report.html"><i class="fa fa-user-check"></i> Attendance</a>
+                <a href="academic-performance.html"><i class="fa fa-chart-pie"></i> Academic Performance</a>
+                <a href="fees-payment.html"><i class="fa fa-rupee-sign"></i> Fees Payment</a>
+                <a href="student-profile.html" class="active"><i class="fa fa-user"></i> Profile</a>
+                <a href="index.html"><i class="fa fa-sign-out-alt"></i> Logout</a>
+            </nav>
+            <a href="#contact-support" style="margin-top:auto; background:#2563eb; color:#fff; font-weight:600; border-radius:0.9rem; text-align:center; padding:0.45rem 0; font-size:1.01rem; display:block;"><i class="fa fa-headset"></i> Auto Contact Support</a>
+        </aside>
+        <main class="main-content">
+            <div class="profile-header">
+                <div class="title">ITM Skills University</div>
+                <div class="user">
+                    <i class="fa fa-bell"></i>
+                    <i class="fa fa-user-circle"></i>
+                    <div class="name">Roll No: 21CS1001</div>
+                </div>
+            </div>
+            <div class="profile-card">
+                <span class="profile-photo" style="display:flex; align-items:center; justify-content:center; background:#181A20; width:120px; height:120px; border-radius:50%; border:4px solid #2563eb;">
+                    <i class="fa fa-user-circle" style="font-size:5.5rem; color:#bfc9da;"></i>
+                </span>
+                <div class="profile-info">
+                    <h2>Ishaan Khan</h2>
+                    <div class="roll">Roll No: 21CS1001</div>
+                    <div class="course">B.Tech Computer Science</div>
+                    <div class="contact"><i class="fa fa-envelope"></i> ishaan.khan@email.com</div>
+                    <div class="contact"><i class="fa fa-phone"></i> +91 98765 43210</div>
+                    <button class="edit-btn"><i class="fa fa-edit"></i> Edit Profile</button>
+                    <button class="edit-btn" style="background:#10b981; margin-left:1rem;"><i class="fa fa-id-card"></i> Open E-ID Card</button>
+                </div>
+            </div>
+            <div class="profile-sections">
+                <div class="profile-section">
+                    <h3>Personal Information</h3>
+                    <table>
+                        <tr>
+                            <td>Date of Birth:</td>
+                            <td>2004-05-12</td>
+                        </tr>
+                        <tr>
+                            <td>Gender:</td>
+                            <td>Male</td>
+                        </tr>
+                        <tr>
+                            <td>Blood Group:</td>
+                            <td>B+</td>
+                        </tr>
+                        <tr>
+                            <td>Nationality:</td>
+                            <td>Indian</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="profile-section">
+                    <h3>Academic Information</h3>
+                    <table>
+                        <tr>
+                            <td>Course:</td>
+                            <td>B.Tech Computer Science</td>
+                        </tr>
+                        <tr>
+                            <td>Year:</td>
+                            <td>2nd Year</td>
+                        </tr>
+                        <tr>
+                            <td>Section:</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>GPA:</td>
+                            <td>8.7</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="profile-section">
+                    <h3>Contact Information</h3>
+                    <table>
+                        <tr>
+                            <td>Email:</td>
+                            <td>ishaan.khan@email.com</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>+91 98765 43210</td>
+                        </tr>
+                        <tr>
+                            <td>Address:</td>
+                            <td>123, Main Street, Mumbai, India</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

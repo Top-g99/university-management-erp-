@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZENED Login</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <a href="homepage.html" class="glass-btn" style="position: absolute; top: 24px; left: 24px; z-index: 10; width: 54px; height: 54px; display: flex; align-items: center; justify-content: center; padding: 0; background: none; border: none; box-shadow: none; border-radius: 0;">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Back">
+            <polygon points="22,5 10,16 22,27" fill="#fff" />
+        </svg>
+    </a>
+    <div class="glass-bg"></div>
+    <main class="glass-main">
+        <section class="glass-panel glass-info">
+            <div class="flip-card">
+                <div class="flip-card-inner" id="infoFlipCard">
+                    <div class="flip-card-front">
+                        <div class="zened-logo-svg">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="24" r="22" fill="#2563eb" stroke="#fff" stroke-width="4"/>
+                    <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="'Poppins', 'Inter', Arial, sans-serif" font-size="22" font-weight="bold" dy=".3em">Z</text>
+                  </svg>
+                        </div>
+                        <h1 class="brand-title">ZEN<span class="accent">ED</span></h1>
+                        <p class="glass-desc">ZENED is a modern, lightweight ERP platform for colleges. Simplify admissions, attendance, fees, and more—all in your language, online or offline. Experience the next generation of campus management with a beautiful, secure, and
+                            accessible interface.
+                        </p>
+                        <p class="glass-desc">Empowering institutions with seamless digital transformation. Join us and make your college future-ready.</p>
+                        <button class="glass-btn" id="learnMoreBtn">Learn More</button>
+                    </div>
+                    <div class="flip-card-back">
+                        <h2 class="brand-title">About ZENED</h2>
+                        <p class="glass-desc">ZENED is designed for small and mid-sized colleges to digitize admissions, attendance, fees, and academic records. It supports local languages, offline sync, and mobile access for low-resource environments.</p>
+                        <ul class="glass-desc" style="text-align:left;max-width:340px;margin:0 auto 1.2rem auto;">
+                            <li>✔️ Student onboarding & fee tracking</li>
+                            <li>✔️ Attendance & report generation</li>
+                            <li>✔️ Local language & offline support</li>
+                            <li>✔️ Mobile-friendly, modern UI</li>
+                        </ul>
+                        <button class="glass-btn" id="seePlansBtn">See our plans!</button>
+                        <button class="glass-btn" id="backInfoBtn">Back</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="glass-panel glass-login">
+            <div class="role-toggle-group">
+                <button type="button" class="role-toggle active" data-role="student" aria-selected="true">Student</button>
+                <button type="button" class="role-toggle" data-role="parent" aria-selected="false">Parent</button>
+                <button type="button" class="role-toggle" data-role="teacher" aria-selected="false">Teacher</button>
+            </div>
+            <h2 class="glass-login-title" id="loginRoleLabel">Login as Student</h2>
+            <form id="loginForm" autocomplete="on">
+                <input type="hidden" id="loginRole" name="role" value="student" />
+                <div class="glass-input-group">
+                    <input type="text" id="username" name="username" placeholder="Username" required autofocus />
+                </div>
+                <div class="glass-input-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required />
+                </div>
+                <button type="submit" class="glass-btn login-btn">Login</button>
+                <button class="signup-btn-cta" type="button" onclick="window.location.href='pricing.html'">Sign up as an institute</button>
+                <div id="loginError" class="error-message" aria-live="polite" style="display:none;"></div>
+            </form>
+        </section>
+    </main>
+    <script>
+        // Role toggle logic
+        (function() {
+            const toggles = document.querySelectorAll('.role-toggle');
+            const roleInput = document.getElementById('loginRole');
+            const roleLabel = document.getElementById('loginRoleLabel');
+            const roleNames = {
+                student: 'Student',
+                parent: 'Parent',
+                teacher: 'Teacher'
+            };
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    toggles.forEach(t => t.classList.remove('active'));
+                    toggles.forEach(t => t.setAttribute('aria-selected', 'false'));
+                    this.classList.add('active');
+                    this.setAttribute('aria-selected', 'true');
+                    const role = this.getAttribute('data-role');
+                    roleInput.value = role;
+                    roleLabel.textContent = `Login as ${roleNames[role]}`;
+                });
+            });
+        })();
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorDiv = document.getElementById('loginError');
+            const role = document.getElementById('loginRole').value;
+            if (!username || !password) {
+                errorDiv.textContent = 'Please enter both username and password.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            if (role === 'student') {
+                errorDiv.style.display = 'none';
+                window.location.href = 'student-dashboard.html';
+                return;
+            }
+            if (username !== 'admin' || password !== 'admin') {
+                errorDiv.textContent = 'Invalid credentials. Please try again.';
+                errorDiv.style.display = 'block';
+            } else {
+                errorDiv.style.display = 'none';
+                alert('Login successful! (Replace with dashboard redirect)');
+            }
+        });
+        // Flip card logic for Learn More / Back
+        const learnMoreBtn = document.getElementById('learnMoreBtn');
+        const backInfoBtn = document.getElementById('backInfoBtn');
+        const infoFlipCard = document.getElementById('infoFlipCard');
+        if (learnMoreBtn && infoFlipCard) {
+            learnMoreBtn.addEventListener('click', function() {
+                infoFlipCard.classList.add('flipped');
+            });
+        }
+        if (backInfoBtn && infoFlipCard) {
+            backInfoBtn.addEventListener('click', function() {
+                infoFlipCard.classList.remove('flipped');
+            });
+        }
+        // See Plans button navigates to pricing page
+        const seePlansBtn = document.getElementById('seePlansBtn');
+        if (seePlansBtn) {
+            seePlansBtn.addEventListener('click', function() {
+                window.location.href = 'pricing.html';
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | ZENED ERP</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f5f6fa;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            color: #23242B;
+        }
+        
+        .dashboard-root {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.2rem 1.2rem 1.2rem;
+            min-height: 100vh;
+            box-shadow: 2px 0 16px 0 #2563eb11;
+            border-right: 1.5px solid #e5e7eb;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #2563eb;
+            margin-bottom: 2.2rem;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .institution-name {
+            font-size: 1.08rem;
+            font-weight: 600;
+            margin-bottom: 2.2rem;
+            opacity: 0.92;
+            color: #1746a0;
+        }
+        
+        .sidebar nav {
+            flex: 1;
+        }
+        
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 1.08rem;
+            font-weight: 500;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.8rem;
+            margin-bottom: 0.3rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        
+        .sidebar nav a.active,
+        .sidebar nav a:hover {
+            background: #2563eb;
+            color: #fff;
+        }
+        
+        .sidebar .logout {
+            margin-top: 2rem;
+            color: #fff;
+            background: #2563eb;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            padding: 0.7rem 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .sidebar .logout:hover {
+            background: #1746a0;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 2.5rem 3.5vw;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2.2rem;
+        }
+        
+        .admin-header .admin-welcome {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1746a0;
+        }
+        
+        .admin-header .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+        }
+        
+        .admin-header .admin-profile-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            font-weight: 700;
+            box-shadow: 0 2px 8px 0 #2563eb22;
+        }
+        
+        .dashboard-cards {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: flex-start;
+            margin-bottom: 2.5rem;
+        }
+        
+        .dashboard-card {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+            padding: 2rem 2.5rem;
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.7rem;
+            border: 1.5px solid #e5e7eb;
+        }
+        
+        .dashboard-card .summary-title {
+            font-size: 1.1rem;
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        
+        .dashboard-card .summary-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #23242B;
+        }
+        
+        .dashboard-card .summary-desc {
+            font-size: 0.98rem;
+            color: #666;
+            opacity: 0.85;
+        }
+        
+        .admin-activity {
+            background: #f7faff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border: 1.5px solid #e5e7eb;
+        }
+        
+        .admin-activity-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+        
+        .admin-activity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .admin-activity-list li {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        
+        @media (max-width: 1100px) {
+            .dashboard-cards {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            .main-content {
+                padding: 1.2rem 0.5rem;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .dashboard-root {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100vw;
+                flex-direction: row;
+                align-items: center;
+                padding: 1.2rem 0.5rem;
+                gap: 1.5rem;
+                min-height: unset;
+                border-right: none;
+                border-bottom: 1.5px solid #e5e7eb;
+            }
+            .sidebar nav {
+                flex-direction: row;
+                gap: 1.2rem;
+            }
+            .sidebar .logout {
+                margin-top: 0;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 1.2rem 2vw;
+            }
+            .dashboard-cards {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-root">
+        <aside class="sidebar">
+            <div class="logo" style="display:flex; align-items:center; gap:0.7rem;">
+                <span class="zened-logo-svg" style="display:flex; align-items:center;">
+                    <svg width="38" height="38" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="22" fill="#2563eb" stroke="#fff" stroke-width="4"/>
+                        <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="'Poppins', 'Inter', Arial, sans-serif" font-size="22" font-weight="bold" dy=".3em">Z</text>
+                    </svg>
+                </span>
+                <span class="brand-title" style="font-size:1.3rem; font-weight:500; color:#fff; letter-spacing:0.01em;">ZEN<span class="accent" style="color:#2563eb;">ED</span></span>
+            </div>
+            <div class="institution-name" id="institutionNameSidebar"></div>
+            <nav>
+                <a href="admin-dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+                <a href="manage-students.html"><i class="fa fa-users"></i> Manage Students</a>
+                <a href="manage-teachers.html"><i class="fa fa-chalkboard-teacher"></i> Manage Teachers</a>
+                <a href="reports.html" class="active"><i class="fa fa-chart-bar"></i> Reports</a>
+                <a href="#"><i class="fa fa-cog"></i> Settings</a>
+            </nav>
+            <button class="logout"><i class="fa fa-sign-out-alt"></i> Logout</button>
+        </aside>
+        <main class="main-content">
+            <div class="admin-header">
+                <div class="admin-welcome" id="adminWelcome">Welcome, Admin!</div>
+                <div class="admin-profile">
+                    <div class="admin-profile-icon"><i class="fa fa-user-shield"></i></div>
+                </div>
+            </div>
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <div class="summary-title">Total Students</div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-desc">No students added yet</div>
+                    <div style="font-size:0.98rem;color:#2563eb;font-weight:600;margin-top:0.2rem;">Unlimited students (Enterprise Plan)</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Total Teachers</div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-desc">No teachers added yet</div>
+                    <div style="font-size:0.98rem;color:#2563eb;font-weight:600;margin-top:0.2rem;">Unlimited teachers (Enterprise Plan)</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Active Teachers</div>
+                    <div class="summary-value" id="activeTeachers">0</div>
+                    <div class="summary-desc">Teachers active this month</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Today's Attendance %</div>
+                    <div class="summary-value" id="todaysAttendance">0%</div>
+                    <div class="summary-desc">Attendance marked today</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Fees Collected (This Month)</div>
+                    <div class="summary-value" id="feesCollected">₹0</div>
+                    <div class="summary-desc">Total fees collected in July</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Pending Dues</div>
+                    <div class="summary-value" id="pendingDues">₹0</div>
+                    <div class="summary-desc">Outstanding student dues</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Current Term Progress</div>
+                    <div class="summary-value" id="termProgress">0%</div>
+                    <div class="summary-desc">Term completion status</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="summary-title">Recent Activity</div>
+                    <div class="summary-value"><i class="fa fa-clock"></i></div>
+                    <div class="summary-desc">No activity yet</div>
+                </div>
+            </div>
+            <div class="charts-row" style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem;">
+                <div class="chart-card" style="background:#fff;border-radius:1.2rem;box-shadow:0 4px 24px rgba(37,99,235,0.07);padding:1.2rem 1.2rem;min-width:220px;flex:1;display:flex;flex-direction:column;align-items:center;border:1.5px solid #e5e7eb;">
+                    <div class="chart-title" style="font-size:1.08rem;color:#2563eb;font-weight:700;margin-bottom:1rem;">Admissions Trend</div>
+                    <canvas id="admissionsChart" width="320" height="120"></canvas>
+                </div>
+                <div class="chart-card" style="background:#fff;border-radius:1.2rem;box-shadow:0 4px 24px rgba(37,99,235,0.07);padding:1.2rem 1.2rem;min-width:220px;flex:1;display:flex;flex-direction:column;align-items:center;border:1.5px solid #e5e7eb;">
+                    <div class="chart-title" style="font-size:1.08rem;color:#2563eb;font-weight:700;margin-bottom:1rem;">Attendance Overview</div>
+                    <canvas id="attendanceChart" width="320" height="120"></canvas>
+                </div>
+                <div class="chart-card" style="background:#fff;border-radius:1.2rem;box-shadow:0 4px 24px rgba(37,99,235,0.07);padding:1.2rem 1.2rem;min-width:220px;flex:1;display:flex;flex-direction:column;align-items:center;border:1.5px solid #e5e7eb;">
+                    <div class="chart-title" style="font-size:1.08rem;color:#2563eb;font-weight:700;margin-bottom:1rem;">Inactive Students</div>
+                    <canvas id="inactiveChart" width="320" height="120"></canvas>
+                </div>
+            </div>
+            <!-- New Graphs Row -->
+            <div class="charts-row" style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2.5rem;">
+                <div class="chart-card" style="background:#fff;border-radius:1.2rem;box-shadow:0 4px 24px rgba(37,99,235,0.07);padding:1.2rem 1.2rem;min-width:220px;flex:1;display:flex;flex-direction:column;align-items:center;border:1.5px solid #e5e7eb;">
+                    <div class="chart-title" style="font-size:1.08rem;color:#2563eb;font-weight:700;margin-bottom:1rem;">Class-wise Attendance</div>
+                    <canvas id="classAttendanceChart" width="320" height="120"></canvas>
+                </div>
+                <div class="chart-card" style="background:#fff;border-radius:1.2rem;box-shadow:0 4px 24px rgba(37,99,235,0.07);padding:1.2rem 1.2rem;min-width:220px;flex:1;display:flex;flex-direction:column;align-items:center;border:1.5px solid #e5e7eb;">
+                    <div class="chart-title" style="font-size:1.08rem;color:#2563eb;font-weight:700;margin-bottom:1rem;">Fee Collection Trend</div>
+                    <canvas id="feeCollectionChart" width="320" height="120"></canvas>
+                </div>
+                <div class="chart-card" style="background:#fff;border-radius:1.2rem;box-shadow:0 4px 24px rgba(37,99,235,0.07);padding:1.2rem 1.2rem;min-width:220px;flex:1;display:flex;flex-direction:column;align-items:center;border:1.5px solid #e5e7eb;">
+                    <div class="chart-title" style="font-size:1.08rem;color:#2563eb;font-weight:700;margin-bottom:1rem;">Dropout/Withdrawal Trend</div>
+                    <canvas id="dropoutChart" width="320" height="120"></canvas>
+                </div>
+            </div>
+            <div class="admin-activity">
+                <div class="admin-activity-title">Recent Activity</div>
+                <ul class="admin-activity-list">
+                    <li><i class="fa fa-info-circle"></i> Your institution account was created.</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Show institution name from localStorage
+        const instName = localStorage.getItem('institutionName') || 'Your Institution';
+        document.getElementById('institutionNameSidebar').textContent = instName;
+        document.getElementById('adminWelcome').textContent = `Welcome to ${instName}!`;
+
+        // Admissions Trend Chart
+        new Chart(document.getElementById('admissionsChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                datasets: [{
+                    label: 'Admissions',
+                    data: [10, 15, 18, 20, 14, 16, 12, 15],
+                    backgroundColor: '#2563eb',
+                    borderRadius: 8,
+                    maxBarThickness: 32
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#1746a0'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+        // Attendance Overview Chart
+        new Chart(document.getElementById('attendanceChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Present', 'Absent'],
+                datasets: [{
+                    data: [92, 8],
+                    backgroundColor: ['#2563eb', '#e5e7eb'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                cutout: '70%',
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+        // Inactive Students Chart
+        new Chart(document.getElementById('inactiveChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['Inactive', 'Active'],
+                datasets: [{
+                    data: [8, 112],
+                    backgroundColor: ['#e11d48', '#2563eb'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+        // Class-wise Attendance Bar Chart
+        new Chart(document.getElementById('classAttendanceChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Class A', 'Class B', 'Class C', 'Class D', 'Class E'],
+                datasets: [{
+                    label: 'Attendance %',
+                    data: [95, 89, 92, 87, 90],
+                    backgroundColor: '#2563eb',
+                    borderRadius: 8,
+                    maxBarThickness: 32
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: '#1746a0',
+                            callback: v => v + '%'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+        // Fee Collection Trend Line Chart
+        new Chart(document.getElementById('feeCollectionChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Fees Collected',
+                    data: [120000, 135000, 128000, 140000, 150000, 145000, 160000],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16,185,129,0.08)',
+                    tension: 0.3,
+                    fill: true,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#10b981',
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#1746a0',
+                            callback: v => '₹' + v.toLocaleString()
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+        // Dropout/Withdrawal Trend Pie Chart
+        new Chart(document.getElementById('dropoutChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['Dropouts', 'Withdrawals', 'Active'],
+                datasets: [{
+                    data: [5, 3, 120],
+                    backgroundColor: ['#ef4444', '#facc15', '#2563eb'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Activity Report | ZENED ERP</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: #f5f6fa;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            color: #23242B;
+            margin: 0;
+        }
+        
+        .dashboard-root {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.2rem 1.2rem 1.2rem;
+            min-height: 100vh;
+            box-shadow: 2px 0 16px 0 #2563eb11;
+            border-right: 1.5px solid #e5e7eb;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #2563eb;
+            margin-bottom: 2.2rem;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .institution-name {
+            font-size: 1.08rem;
+            font-weight: 600;
+            margin-bottom: 2.2rem;
+            opacity: 0.92;
+            color: #1746a0;
+        }
+        
+        .sidebar nav {
+            flex: 1;
+        }
+        
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 1.08rem;
+            font-weight: 500;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.8rem;
+            margin-bottom: 0.3rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        
+        .sidebar nav a.active,
+        .sidebar nav a:hover {
+            background: #2563eb;
+            color: #fff;
+        }
+        
+        .sidebar .logout {
+            margin-top: 2rem;
+            color: #fff;
+            background: #2563eb;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            padding: 0.7rem 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .sidebar .logout:hover {
+            background: #1746a0;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 2.5rem 3.5vw;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        
+        .header-row h2 {
+            font-size: 1.5rem;
+            color: #1746a0;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .profile-section {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+        
+        .profile-card {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+            padding: 2rem 2.5rem;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.7rem;
+            border: 1.5px solid #e5e7eb;
+        }
+        
+        .profile-title {
+            font-size: 1.1rem;
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        
+        .profile-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #23242B;
+        }
+        
+        .charts-row {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .chart-card {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+            padding: 1.2rem 1.2rem;
+            min-width: 220px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1.5px solid #e5e7eb;
+        }
+        
+        .chart-title {
+            font-size: 1.08rem;
+            color: #2563eb;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .grades-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+            overflow: hidden;
+            margin-top: 1.2rem;
+        }
+        
+        .grades-table th,
+        .grades-table td {
+            padding: 0.7rem 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .grades-table th {
+            background: #f7faff;
+            color: #2563eb;
+            font-size: 1.08rem;
+            font-weight: 700;
+        }
+        
+        .grades-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .fee-status-card {
+            background: #f7faff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+            padding: 1.2rem 1.5rem;
+            margin-top: 1.5rem;
+            border: 1.5px solid #e5e7eb;
+        }
+        
+        .fee-status-title {
+            font-size: 1.08rem;
+            color: #2563eb;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .fee-status-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .fee-status-table th,
+        .fee-status-table td {
+            padding: 0.6rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .fee-status-table th {
+            background: #e5e7eb;
+            color: #1746a0;
+            font-size: 1.02rem;
+            font-weight: 600;
+        }
+        
+        .fee-status-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        @media (max-width: 1100px) {
+            .profile-section,
+            .charts-row {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            .main-content {
+                padding: 1.2rem 0.5rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 1.2rem 2vw;
+            }
+            .chart-card {
+                min-width: 0;
+                padding: 1rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-root">
+        <aside class="sidebar">
+            <div class="logo" style="display:flex; align-items:center; gap:0.7rem;">
+                <span class="zened-logo-svg" style="display:flex; align-items:center;">
+          <svg width="38" height="38" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" fill="#2563eb" stroke="#fff" stroke-width="4"/>
+            <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="'Poppins', 'Inter', Arial, sans-serif" font-size="22" font-weight="bold" dy=".3em">Z</text>
+          </svg>
+        </span>
+                <span class="brand-title" style="font-family:'Poppins', 'Inter', Arial, sans-serif; font-weight:700; font-size:1.7rem; color:#1a3cff; letter-spacing:0.04em;">ZEN<span class="accent" style="color:#2563eb; font-family:inherit;">ED</span></span>
+            </div>
+            <div class="institution-name" id="institutionNameSidebar"></div>
+            <nav>
+                <a href="admin-dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+                <a href="manage-students.html"><i class="fa fa-users"></i> Manage Students</a>
+                <a href="manage-teachers.html"><i class="fa fa-chalkboard-teacher"></i> Manage Teachers</a>
+                <a href="reports.html"><i class="fa fa-chart-bar"></i> Reports</a>
+                <a href="#"><i class="fa fa-cog"></i> Settings</a>
+            </nav>
+            <button class="logout"><i class="fa fa-sign-out-alt"></i> Logout</button>
+        </aside>
+        <main class="main-content">
+            <div class="header-row">
+                <h2>Student Activity Report</h2>
+            </div>
+            <div class="profile-section">
+                <div class="profile-card">
+                    <div class="profile-title">Student Name</div>
+                    <div class="profile-value">Aarav Sharma</div>
+                    <div class="profile-title">Roll Number</div>
+                    <div class="profile-value">21CS1001</div>
+                    <div class="profile-title">Email</div>
+                    <div class="profile-value">aarav.sharma@zened.edu.in</div>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-title">Attendance</div>
+                    <div class="profile-value">93%</div>
+                    <div class="chart-card" style="box-shadow:none; border:none; padding:0; min-width:0;">
+                        <canvas id="attendanceChart" width="180" height="120"></canvas>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-title">Fee Status</div>
+                    <div class="fee-status-card">
+                        <div class="fee-status-title">Semester 2</div>
+                        <table class="fee-status-table">
+                            <tr>
+                                <th>Status</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                            </tr>
+                            <tr>
+                                <td style="color:#22c55e;font-weight:600;">Paid</td>
+                                <td>₹32,000</td>
+                                <td>2024-03-15</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="chart-title">Grades (Subject-wise)</div>
+                    <canvas id="gradesChart" width="220" height="120"></canvas>
+                    <table class="grades-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mathematics</td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>Physics</td>
+                                <td>B+</td>
+                            </tr>
+                            <tr>
+                                <td>Computer Science</td>
+                                <td>A+</td>
+                            </tr>
+                            <tr>
+                                <td>English</td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>Elective</td>
+                                <td>B</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        // Sidebar institution name
+        document.getElementById('institutionNameSidebar').textContent = localStorage.getItem('institutionName') || 'Your Institution';
+        // Attendance Chart
+        new Chart(document.getElementById('attendanceChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Present', 'Absent'],
+                datasets: [{
+                    data: [93, 7],
+                    backgroundColor: ['#2563eb', '#e5e7eb'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                cutout: '70%',
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+        // Grades Chart
+        new Chart(document.getElementById('gradesChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Math', 'Physics', 'CS', 'English', 'Elective'],
+                datasets: [{
+                    label: 'Grade',
+                    data: [90, 78, 96, 88, 72],
+                    backgroundColor: '#2563eb',
+                    borderRadius: 8,
+                    maxBarThickness: 24
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: '#1746a0'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#1746a0'
+                        }
+                    }
+                },
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+
+</html>

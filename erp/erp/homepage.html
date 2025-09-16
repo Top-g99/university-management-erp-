@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZENED ERP - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+        
+         :root {
+            --primary: #2563eb;
+            --secondary: #fbbf24;
+            --background: #f9fafb;
+            --accent: #e0e7ff;
+            --dark: #1e293b;
+            --card: #fff;
+            --muted: #64748b;
+            --testimonial-border: #fbbf24;
+        }
+        
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        li,
+        span,
+        td,
+        th,
+        button,
+        input,
+        a,
+        div {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif !important;
+        }
+        
+        body {
+            background: var(--background);
+            font-family: 'Inter', 'Montserrat', 'Poppins', Arial, sans-serif;
+            margin: 0;
+            color: var(--dark);
+            font-weight: 400;
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Inter', 'Montserrat', 'Poppins', Arial, sans-serif;
+            font-weight: 800;
+            margin: 0 0 0.5em 0;
+        }
+        
+        p,
+        li,
+        span,
+        td,
+        th,
+        button,
+        input,
+        a {
+            font-family: 'Inter', 'Montserrat', 'Poppins', Arial, sans-serif;
+            font-weight: 400;
+        }
+        
+        .navbar .logo {
+            font-family: 'Inter', 'Montserrat', 'Poppins', Arial, sans-serif;
+            font-weight: 800;
+            font-size: 1.7rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .top-banner {
+            background: var(--primary);
+            color: #fff;
+            text-align: center;
+            padding: 0.5rem 0;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-weight: 800;
+            font-size: 1.7rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+            margin-right: 1.2rem;
+        }
+        
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.15s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        
+        .nav-actions input {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        
+        .nav-actions button {
+            padding: 0.5rem 1.2rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .nav-actions .signup {
+            background: var(--secondary);
+            color: #222;
+        }
+        
+        .hero {
+            background: url('https://i.pinimg.com/736x/04/72/b9/0472b91305c72c4502dcd9efda6e1f4f.jpg') center center/cover no-repeat;
+            color: #fff;
+            text-align: center;
+            padding: 4.5rem 1rem 3.5rem 1rem;
+            min-height: 370px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero::before {
+            display: none;
+        }
+        
+        .hero>* {
+            position: static;
+            z-index: auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.7rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 1.2rem;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .hero button:hover {
+            background: #1746a0;
+        }
+        
+        .how-it-works {
+            background: #fff;
+            padding: 4.5rem 1rem 3.5rem 1rem;
+            text-align: center;
+        }
+        
+        .how-it-works h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        
+        .step {
+            background: var(--accent);
+            border-radius: 1rem;
+            padding: 2rem 1.5rem;
+            max-width: 300px;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
+            text-align: left;
+        }
+        
+        .step h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+        }
+        
+        .step p {
+            font-size: 1rem;
+            color: #333;
+        }
+        
+        .trust-section {
+            background: var(--background);
+            padding: 4rem 1rem 3.5rem 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3.5rem;
+        }
+        
+        .trust-card {
+            background: var(--card);
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
+            padding: 1.5rem 2rem;
+            min-width: 220px;
+            max-width: 300px;
+            flex: 1 1 220px;
+            text-align: left;
+            font-size: 1.05rem;
+            color: var(--dark);
+            border-top: 4px solid var(--primary);
+        }
+        
+        .trust-card.highlight {
+            background: linear-gradient(90deg, var(--secondary) 0%, #fbbf24cc 100%);
+            color: #222;
+            border-top: 4px solid var(--secondary);
+        }
+        
+        .testimonials {
+            background: #fff;
+            padding: 4rem 1rem 3.5rem 1rem;
+            text-align: center;
+        }
+        
+        .testimonials h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+        
+        .testimonial-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .testimonial {
+            background: var(--card);
+            border: 1.5px solid var(--testimonial-border);
+            border-radius: 1rem;
+            padding: 1.5rem 1.2rem;
+            max-width: 340px;
+            min-width: 220px;
+            text-align: left;
+            font-size: 1.05rem;
+            color: var(--dark);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
+        }
+        
+        .testimonial .author {
+            margin-top: 1rem;
+            color: #e11d48;
+            font-weight: 600;
+            font-size: 0.98rem;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: #fff;
+            text-align: center;
+            padding: 2.5rem 0 2rem 0;
+            font-size: 1rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 900px) {
+            .steps,
+            .testimonial-cards,
+            .trust-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero {
+                padding: 3rem 1rem 2rem 1rem;
+                min-height: 300px;
+            }
+            .how-it-works {
+                padding: 2.5rem 1rem 2rem 1rem;
+            }
+            .trust-section {
+                padding: 2.5rem 1rem 2rem 1rem;
+            }
+            .testimonials {
+                padding: 2.5rem 1rem 2rem 1rem;
+            }
+            footer {
+                padding: 1.2rem 0 1rem 0;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body id="home">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            ZENED ERP
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#lms">LMS</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+        <div class="nav-actions" style="margin-left:auto;">
+            <button onclick="window.location.href='index.html'">Log in</button>
+            <button class="signup" onclick="window.location.href='pricing.html'">Get Started</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Transform Your Institution with ZENED ERP</h1>
+        <p>All-in-one platform to streamline administration, manage students and teachers, automate attendance and fees, and gain actionable insights with real-time analytics. Secure, scalable, and designed for educational excellence.</p>
+        <button onclick="window.location.href='pricing.html'">Get Started for Free!</button>
+    </section>
+
+    <!-- Feature Highlights Panel -->
+    <section id="features" class="feature-highlights" style="background:#fff; padding:3.5rem 1rem 3.5rem 1rem; margin: 0 0 3.5rem 0;">
+        <h2 style="text-align:center; font-size:2.1rem; font-weight:800; color:var(--dark); margin-bottom:2.5rem;">Perfect School Management System to Meet Your Institution Needs</h2>
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:3.5rem; max-width:1200px; margin:0 auto;">
+            <!-- Column 1 -->
+            <div style="flex:1 1 260px; max-width:340px; min-width:220px; text-align:center;">
+                <div style="margin-bottom:1.2rem;">
+                    <svg width="64" height="64" fill="none" viewBox="0 0 64 64" style="display:inline-block;">
+                        <circle cx="32" cy="32" r="30" stroke="#fbbf24" stroke-width="4" fill="none"/>
+                        <path d="M20 40c0-4 8-4 8-4s8 0 8 4v2H20v-2z" stroke="#23304a" stroke-width="2.5" fill="#fff"/>
+                        <circle cx="32" cy="28" r="6" stroke="#23304a" stroke-width="2.5" fill="#fff"/>
+                        <path d="M32 22v-2m0 0c0-2.5 4-2.5 4 0v2" stroke="#fbbf24" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div style="font-weight:800; font-size:1.18rem; color:var(--dark); margin-bottom:0.7rem;">Simple & Easy to use for Teachers</div>
+                <div style="color:#64748b; font-size:1.08rem;">Designed to engage teachers and parents. No expertise is required to quickly accomplish a task.</div>
+            </div>
+            <!-- Column 2 -->
+            <div style="flex:1 1 260px; max-width:340px; min-width:220px; text-align:center;">
+                <div style="margin-bottom:1.2rem;">
+                    <svg width="64" height="64" fill="none" viewBox="0 0 64 64" style="display:inline-block;">
+                        <rect x="10" y="18" width="44" height="28" rx="6" stroke="#23304a" stroke-width="2.5" fill="#fff"/>
+                        <path d="M32 18v-4m0 0l-4 4m4-4l4 4" stroke="#fbbf24" stroke-width="2.5"/>
+                        <path d="M20 34h24" stroke="#fbbf24" stroke-width="2.5"/>
+                    </svg>
+                </div>
+                <div style="font-weight:800; font-size:1.18rem; color:var(--dark); margin-bottom:0.7rem;">Powerful features for your Institution</div>
+                <div style="color:#64748b; font-size:1.08rem;">We provide everything you will ever need to run an education institution. No customization required</div>
+            </div>
+            <!-- Column 3 -->
+            <div style="flex:1 1 260px; max-width:340px; min-width:220px; text-align:center;">
+                <div style="margin-bottom:1.2rem;">
+                    <svg width="64" height="64" fill="none" viewBox="0 0 64 64" style="display:inline-block;">
+                        <rect x="14" y="18" width="36" height="28" rx="8" stroke="#23304a" stroke-width="2.5" fill="#fff"/>
+                        <rect x="24" y="30" width="16" height="10" rx="3" stroke="#fbbf24" stroke-width="2.5" fill="#fff"/>
+                        <circle cx="32" cy="26" r="3" stroke="#23304a" stroke-width="2.5" fill="#fff"/>
+                        <path d="M32 40v4" stroke="#fbbf24" stroke-width="2.5"/>
+                    </svg>
+                </div>
+                <div style="font-weight:800; font-size:1.18rem; color:var(--dark); margin-bottom:0.7rem;">Online & On-site Customer Support</div>
+                <div style="color:#64748b; font-size:1.08rem;">Along with online & on-site support, we also offer on-demand & webinar-based training to our customers.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <div class="how-it-works-row" style="display:flex; flex-direction:row; align-items:flex-start; justify-content:space-between; gap:2.5rem; width:100%; margin:0 0 2rem 0;">
+        <section class="how-it-works" style="background:#fff; text-align:left; width: 100%; max-width:900px; border-radius:1.2rem; box-shadow:0 2px 8px rgba(37,99,235,0.04); padding:2.5rem 2rem; margin:0 0 0 2rem;">
+            <h2 style="color:var(--dark); font-size:2rem; font-weight:800; margin-bottom:0.5rem;">How It Works (For Institutions)</h2>
+            <div style="color:var(--muted); font-size:1.15rem; font-weight:500; margin-bottom:2rem;">Your Journey, Perfected in 3 Steps</div>
+            <ol style="padding-left:1.2rem;">
+                <li style="margin-bottom:1.5rem;">
+                    <span style="font-weight:700; color:var(--primary); font-size:1.1rem;">1. Sign Up & Onboard</span><br/>
+                    <span style="color:var(--dark); font-size:1rem;">Register your institution and quickly onboard your staff and students with our guided setup.</span>
+                </li>
+                <li style="margin-bottom:1.5rem;">
+                    <span style="font-weight:700; color:var(--primary); font-size:1.1rem;">2. Manage Everything</span><br/>
+                    <span style="color:var(--dark); font-size:1rem;">Centralize admissions, attendance, fees, and academic records—all in one secure dashboard.</span>
+                </li>
+                <li>
+                    <span style="font-weight:700; color:var(--primary); font-size:1.1rem;">3. Analyze & Grow</span><br/>
+                    <span style="color:var(--dark); font-size:1rem;">Access real-time analytics and reports to make data-driven decisions and foster institutional growth.</span>
+                </li>
+            </ol>
+        </section>
+        <div class="how-it-works-img" style="flex:0 0 420px; display:flex; align-items:flex-start; justify-content:flex-end; margin-right:3.5rem; margin-top:2.5rem;">
+            <img src="https://schoolplayer.in/assets/images/new_image/inner-page-banner4.png" alt="ERP Dashboard Illustration" style="max-width:420px; width:100%; border-radius:1.2rem; box-shadow:0 2px 8px rgba(37,99,235,0.08); background:#f3f6fb; margin-right:0;"
+            />
+        </div>
+    </div>
+
+    <!-- AI LMS ERP Panel -->
+    <section id="lms" class="ai-lms-erp-panel" style="background:#fafbfc; padding:3.5rem 1rem 3.5rem 1rem; margin: 0 0 3.5rem 0;">
+        <h2 style="text-align:center; font-size:2.1rem; font-weight:800; color:var(--dark); margin-bottom:1.2rem;">An ERP with an Integrated AI LMS</h2>
+        <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:2.2rem;">
+            <img src="https://cdn.prod.website-files.com/646b1aaa6e6c6171bccb6fcf/646b71e7130d9c4bb577cba6_Lisa%20-%20Final%20-%20Logo%20-%20black.svg" alt="LISAAPP Logo" style="height:38px; margin-bottom:0.5rem;" />
+            <span style="font-size:1.08rem; color:#23304a; font-weight:600; letter-spacing:0.01em;">LMS provided by LISAAPP</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2.2rem; max-width:1200px; margin:0 auto;">
+            <!-- Card 1 -->
+            <div style="background:#fff; border-radius:1.5rem; box-shadow:0 2px 12px rgba(37,99,235,0.06); padding:2.2rem 1.5rem 1.7rem 1.5rem; display:flex; flex-direction:column; align-items:flex-start; min-height:200px;">
+                <div style="margin-bottom:1.1rem;">
+                    <svg width='40' height='40' fill='none' viewBox='0 0 40 40'><rect width='40' height='40' rx='12' fill='#fff' stroke='#fbbf24' stroke-width='2'/><path d='M20 12v8l6 3' stroke='#fbbf24' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/><path d='M20 36c8.837 0 16-7.163 16-16S28.837 4 20 4 4 11.163 4 20s7.163 16 16 16Z' stroke='#fbbf24' stroke-width='2.2'/></svg>
+                </div>
+                <div style="font-weight:800; font-size:1.13rem; color:var(--dark); margin-bottom:0.6rem;">AI-Generated Content in Minutes</div>
+                <div style="color:#64748b; font-size:1.05rem;">Upload Notes, PDFs, or PPTs and instantly generate Videos, Infographics, and Assessments</div>
+            </div>
+            <!-- Card 2 -->
+            <div style="background:#fff; border-radius:1.5rem; box-shadow:0 2px 12px rgba(37,99,235,0.06); padding:2.2rem 1.5rem 1.7rem 1.5rem; display:flex; flex-direction:column; align-items:flex-start; min-height:200px;">
+                <div style="margin-bottom:1.1rem;">
+                    <svg width='40' height='40' fill='none' viewBox='0 0 40 40'><rect width='40' height='40' rx='12' fill='#fff' stroke='#22c55e' stroke-width='2'/><path d='M20 12v8l6 3' stroke='#22c55e' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/><circle cx='20' cy='20' r='16' stroke='#22c55e' stroke-width='2.2'/></svg>
+                </div>
+                <div style="font-weight:800; font-size:1.13rem; color:var(--dark); margin-bottom:0.6rem;">Personalized Learning Paths</div>
+                <div style="color:#64748b; font-size:1.05rem;">Create personalized learning paths for every student based on their unique learning curve</div>
+            </div>
+            <!-- Card 3 -->
+            <div style="background:#fff; border-radius:1.5rem; box-shadow:0 2px 12px rgba(37,99,235,0.06); padding:2.2rem 1.5rem 1.7rem 1.5rem; display:flex; flex-direction:column; align-items:flex-start; min-height:200px;">
+                <div style="margin-bottom:1.1rem;">
+                    <svg width='40' height='40' fill='none' viewBox='0 0 40 40'><rect width='40' height='40' rx='12' fill='#fff' stroke='#fbbf24' stroke-width='2'/><path d='M20 12v8l6 3' stroke='#fbbf24' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/><path d='M20 36c8.837 0 16-7.163 16-16S28.837 4 20 4 4 11.163 4 20s7.163 16 16 16Z' stroke='#fbbf24' stroke-width='2.2'/></svg>
+                </div>
+                <div style="font-weight:800; font-size:1.13rem; color:var(--dark); margin-bottom:0.6rem;">Create AI-Powered Assessments with Instant Grading</div>
+                <div style="color:#64748b; font-size:1.05rem;">MCQs, case studies, and smart exams with real-time feedback</div>
+            </div>
+            <!-- Card 4 -->
+            <div style="background:#fff; border-radius:1.5rem; box-shadow:0 2px 12px rgba(37,99,235,0.06); padding:2.2rem 1.5rem 1.7rem 1.5rem; display:flex; flex-direction:column; align-items:flex-start; min-height:200px;">
+                <div style="margin-bottom:1.1rem;">
+                    <svg width='40' height='40' fill='none' viewBox='0 0 40 40'><rect width='40' height='40' rx='12' fill='#fff' stroke='#a78bfa' stroke-width='2'/><path d='M20 12v8l6 3' stroke='#a78bfa' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/><circle cx='20' cy='20' r='16' stroke='#a78bfa' stroke-width='2.2'/></svg>
+                </div>
+                <div style="font-weight:800; font-size:1.13rem; color:var(--dark); margin-bottom:0.6rem;">Interactive and Engaging to Enhance Attention Span</div>
+                <div style="color:#64748b; font-size:1.05rem;">Transform notes, PDFs, PPTs, and docs into reels, podcasts, and infographics for daily student engagement</div>
+            </div>
+            <!-- Card 5 -->
+            <div style="background:#fff; border-radius:1.5rem; box-shadow:0 2px 12px rgba(37,99,235,0.06); padding:2.2rem 1.5rem 1.7rem 1.5rem; display:flex; flex-direction:column; align-items:flex-start; min-height:200px;">
+                <div style="margin-bottom:1.1rem;">
+                    <svg width='40' height='40' fill='none' viewBox='0 0 40 40'><rect width='40' height='40' rx='12' fill='#fff' stroke='#64748b' stroke-width='2'/><path d='M20 12v8l6 3' stroke='#64748b' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/><circle cx='20' cy='20' r='16' stroke='#64748b' stroke-width='2.2'/></svg>
+                </div>
+                <div style="font-weight:800; font-size:1.13rem; color:var(--dark); margin-bottom:0.6rem;">Smart Analytics and Progress Tracking</div>
+                <div style="color:#64748b; font-size:1.05rem;">Identify top-performing students and those who need extra support</div>
+            </div>
+            <!-- Card 6 -->
+            <div style="background:#fff; border-radius:1.5rem; box-shadow:0 2px 12px rgba(37,99,235,0.06); padding:2.2rem 1.5rem 1.7rem 1.5rem; display:flex; flex-direction:column; align-items:flex-start; min-height:200px;">
+                <div style="margin-bottom:1.1rem;">
+                    <svg width='40' height='40' fill='none' viewBox='0 0 40 40'><rect width='40' height='40' rx='12' fill='#fff' stroke='#2563eb' stroke-width='2'/><path d='M20 12v8l6 3' stroke='#2563eb' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/><circle cx='20' cy='20' r='16' stroke='#2563eb' stroke-width='2.2'/></svg>
+                </div>
+                <div style="font-weight:800; font-size:1.13rem; color:var(--dark); margin-bottom:0.6rem;">Seamless Hybrid Learning</div>
+                <div style="color:#64748b; font-size:1.05rem;">Conduct online, offline & hybrid programs effortlessly</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LMS Comparison Panel -->
+    <section class="lms-comparison-panel" style="padding:3.5rem 1rem 3.5rem 1rem; background:#fff;">
+        <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:row; gap:2.5rem; align-items:stretch;">
+            <!-- Features List -->
+            <div style="flex:0 0 210px; display:flex; flex-direction:column; justify-content:stretch; gap:0; font-size:1.13rem; color:#222; font-weight:600; padding-top:3.2rem;">
+                <div style="height:3.2rem;"></div>
+                <div style="padding:1.2rem 0;">Course Creation</div>
+                <div style="padding:1.2rem 0;">Assessment & Grading</div>
+                <div style="padding:1.2rem 0;">Student Engagement</div>
+                <div style="padding:1.2rem 0;">Doubt Solving</div>
+                <div style="padding:1.2rem 0;">Career Readiness</div>
+                <div style="padding:1.2rem 0;">Performance Analytics</div>
+            </div>
+            <!-- Traditional Platform -->
+            <div style="flex:1 1 340px; background:#fff; border-radius:1.5rem 0 0 1.5rem; box-shadow:0 2px 12px rgba(37,99,235,0.06); border:1.5px solid #ececec; border-right:none; overflow:hidden; display:flex; flex-direction:column;">
+                <div style="font-weight:700; font-size:1.13rem; color:#222; padding:1.2rem 1.5rem; border-bottom:1.5px solid #ececec;">Traditional Platform</div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #ececec; color:#444;">Time-consuming & manual</div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #ececec; color:#444;">Slow manual corrections</div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #ececec; color:#444;">Passive learning with low retention</div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #ececec; color:#444;">Students wait for instructor responses</div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #ececec; color:#444;">Limited job preparation tools</div>
+                <div style="padding:1.2rem 1.5rem; color:#444;">Basic tracking</div>
+            </div>
+            <!-- With Lisa -->
+            <div style="flex:1 1 420px; background:#18181b; border-radius:0 1.5rem 1.5rem 0; box-shadow:0 2px 12px rgba(37,99,235,0.06); color:#fff; overflow:hidden; display:flex; flex-direction:column;">
+                <div style="font-weight:700; font-size:1.13rem; color:#fff; padding:1.2rem 1.5rem; border-bottom:1.5px solid #23232a;">with Lisa</div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #23232a; display:flex; align-items:center; gap:0.7rem;"><span style='font-size:1.1rem;'>all the things in traditional platform +</span></div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #23232a; display:flex; align-items:center; gap:0.7rem;"><svg width='20' height='20' fill='none' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='#22c55e'/><path d='M6 10.5l2.5 2L14 7.5' stroke='#fff' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/></svg>AI-auto-generates
+                    reels, podcasts & structured lessons</div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #23232a; display:flex; align-items:center; gap:0.7rem;"><svg width='20' height='20' fill='none' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='#22c55e'/><path d='M6 10.5l2.5 2L14 7.5' stroke='#fff' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/></svg>AI-driven
+                    instant evaluations & feedback</div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #23232a; display:flex; align-items:center; gap:0.7rem;"><svg width='20' height='20' fill='none' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='#22c55e'/><path d='M6 10.5l2.5 2L14 7.5' stroke='#fff' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/></svg>Gamified,
+                    Adaptive, and Engaging Learning Experience</div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #23232a; display:flex; align-items:center; gap:0.7rem;"><svg width='20' height='20' fill='none' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='#22c55e'/><path d='M6 10.5l2.5 2L14 7.5' stroke='#fff' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/></svg>24/7 AI-powered
+                    instant academic assistance</div>
+                <div style="padding:1.2rem 1.5rem; border-bottom:1.5px solid #23232a; display:flex; align-items:center; gap:0.7rem;"><svg width='20' height='20' fill='none' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='#22c55e'/><path d='M6 10.5l2.5 2L14 7.5' stroke='#fff' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/></svg>AI-powered
+                    mock interviews & skill coaching</div>
+                <div style="padding:1.2rem 1.5rem; display:flex; align-items:center; gap:0.7rem;"><svg width='20' height='20' fill='none' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='#22c55e'/><path d='M6 10.5l2.5 2L14 7.5' stroke='#fff' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/></svg>Real-time
+                    AI-powered insights & progress monitoring</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- t Trust & Security Section -->
+    <section class="trust-section">
+        <div class="trust-card highlight">
+            <strong>Data Security</strong><br/> End-to-end encryption and role-based access ensure your data is always protected.
+        </div>
+        <div class="trust-card">
+            <strong>Compliance Ready</strong><br/> Fully compliant with educational data privacy and government regulations.
+        </div>
+        <div class="trust-card">
+            <strong>24/7 Support</strong><br/> Our expert team is available around the clock to help your institution succeed.
+        </div>
+        <div class="trust-card">
+            <strong>Transparent Pricing</strong><br/> No hidden fees. Simple, clear pricing for every institution size.
+        </div>
+    </section>
+
+    <!-- Admin Management Panel -->
+    <section style="position:relative; background: url('https://i.pinimg.com/736x/dd/bd/66/ddbd665803b87f67929f627a0b537da8.jpg') center center/cover no-repeat; color: #fff; border-radius: 1.5rem; margin: 3.5rem 2rem 3.5rem 2rem; padding: 4.5rem 2.5rem 3.5rem 2.5rem; box-shadow: 0 4px 32px 0 rgba(37, 99, 235, 0.08), 0 1.5px 8px 0 #1a3cff11; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 2.5rem; overflow:hidden;">
+        <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,41,59,0.55); border-radius:1.5rem; z-index:1;"></div>
+        <div style="flex: 1 1 340px; min-width: 300px; max-width: 500px; position:relative; z-index:2;">
+            <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem;">Easily manage as an admin</h2>
+            <p style="font-size: 1.15rem; font-weight: 500; margin-bottom: 2rem; color: #f9fafb;">All your institution’s data, analytics, and workflows in one place. Simplify operations, boost efficiency, and make smarter decisions with ZENED ERP.</p>
+            <button id="getStartedAdminBtn" style="background: linear-gradient(90deg, #fbbf24 0%, #2563eb 100%); color: #fff; border: none; border-radius: 1.2rem; padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.15s;">Get Started as Admin</button>
+        </div>
+        <div style="flex: 1 1 340px; min-width: 300px; max-width: 520px; position:relative; z-index:2;">
+            <table style="width: 100%; background: rgba(255,255,255,0.12); border-radius: 1rem; border-collapse: separate; border-spacing: 0; overflow: hidden;">
+                <thead>
+                    <tr style="background: rgba(30,41,59,0.18);">
+                        <th style="padding: 0.9rem 1rem; text-align: left; font-size: 1.08rem; font-weight: 700; color: #fff;">Feature</th>
+                        <th style="padding: 0.9rem 1rem; text-align: left; font-size: 1.08rem; font-weight: 700; color: #fff;">Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; font-weight: 600; color: #fff;">Centralized Dashboard</td>
+                        <td style="padding: 0.7rem 1rem; color: #f9fafb;">Monitor all activities, users, and reports in real time</td>
+                    </tr>
+                    <tr style="background: rgba(30,41,59,0.10);">
+                        <td style="padding: 0.7rem 1rem; font-weight: 600; color: #fff;">Automated Analytics</td>
+                        <td style="padding: 0.7rem 1rem; color: #f9fafb;">Get instant insights on attendance, fees, and performance</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; font-weight: 600; color: #fff;">User Management</td>
+                        <td style="padding: 0.7rem 1rem; color: #f9fafb;">Easily add, edit, or remove students and staff</td>
+                    </tr>
+                    <tr style="background: rgba(30,41,59,0.10);">
+                        <td style="padding: 0.7rem 1rem; font-weight: 600; color: #fff;">Secure Data</td>
+                        <td style="padding: 0.7rem 1rem; color: #f9fafb;">Role-based access and encrypted records</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Testimonial Snippets -->
+    <section id="testimonials" class="testimonials" style="background:#fff; padding:2.5rem 1rem 2rem 1rem;">
+        <h2 style="font-size:2rem; font-weight:800; color:var(--dark); margin-bottom:2rem; text-align:left;">Testimonial Snippets</h2>
+        <div class="testimonial-cards" style="display:flex; flex-wrap:wrap; gap:2rem; justify-content:flex-start;">
+            <div class="testimonial" style="background:#fff; border:2px solid #fbbf24; border-radius:1rem; padding:1.5rem 1.2rem; max-width:340px; min-width:220px; text-align:left; font-size:1.05rem; color:var(--dark); box-shadow:0 2px 8px rgba(37,99,235,0.07); flex:1 1 300px;">
+                <span style="font-size:1.5rem; color:#fbbf24; vertical-align:middle;">&#10077;</span>
+                <span style="font-weight:500;">“ZENED ERP made our admissions and attendance process 10x faster. The analytics dashboard is a game changer!”</span>
+                <div class="author" style="margin-top:1rem; color:#e11d48; font-weight:600; font-size:0.98rem;">– Principal, Sunrise Public School</div>
+            </div>
+            <div class="testimonial" style="background:#fff; border:2px solid #2563eb; border-radius:1rem; padding:1.5rem 1.2rem; max-width:340px; min-width:220px; text-align:left; font-size:1.05rem; color:var(--dark); box-shadow:0 2px 8px rgba(37,99,235,0.07); flex:1 1 300px;">
+                <span style="font-size:1.5rem; color:#2563eb; vertical-align:middle;">&#10077;</span>
+                <span style="font-weight:500;">“Managing fees and student records is now effortless. Our teachers and admin staff love the simplicity.”</span>
+                <div class="author" style="margin-top:1rem; color:#e11d48; font-weight:600; font-size:0.98rem;">– Admin, Green Valley Academy</div>
+            </div>
+            <div class="testimonial" style="background:#fff; border:2px solid #e0e7ff; border-radius:1rem; padding:1.5rem 1.2rem; max-width:340px; min-width:220px; text-align:left; font-size:1.05rem; color:var(--dark); box-shadow:0 2px 8px rgba(37,99,235,0.07); flex:1 1 300px;">
+                <span style="font-size:1.5rem; color:#2563eb; vertical-align:middle;">&#10077;</span>
+                <span style="font-weight:500;">“The support team is always available and the onboarding was super smooth. Highly recommended for any institution.”</span>
+                <div class="author" style="margin-top:1rem; color:#e11d48; font-weight:600; font-size:0.98rem;">– IT Head, City International School</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Time Analytics Panel -->
+    <section style="position:relative; display: flex; flex-direction: row; align-items: center; justify-content: flex-end; background: url('https://i.pinimg.com/1200x/58/a5/08/58a508023db93aeb299f88b8474d867a.jpg') center center/cover no-repeat; color: #fff; border-radius: 1.5rem; margin: 3.5rem 2rem 3.5rem 2rem; padding: 4.5rem 2.5rem 3.5rem 0; box-shadow: 0 4px 32px 0 rgba(37, 99, 235, 0.08), 0 1.5px 8px 0 #1a3cff11; overflow:hidden;">
+        <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(30,41,59,0.60); border-radius:1.5rem; z-index:1;"></div>
+        <div style="flex: 1 1 500px; min-width: 300px; max-width: 600px; display: flex; flex-direction: column; align-items: flex-end; text-align: right; margin-left:auto; margin-right:0; position:relative; z-index:2;">
+            <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem;">Get Real Time Analytics</h2>
+            <p style="font-size: 1.15rem; font-weight: 500; margin-bottom: 2rem; color: #f9fafb;">Visualize your institution’s performance instantly. Track attendance, admissions, fees, and more with live dashboards and actionable insights—anytime, anywhere.</p>
+            <button style="background: linear-gradient(90deg, #2563eb 0%, #fbbf24 100%); color: #fff; border: none; border-radius: 1.2rem; padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.15s;">See Analytics Demo</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 ZENED ERP. All rights reserved. | <a href="#" style="color:#fbbf24;text-decoration:none;">Contact Us</a>
+    </footer>
+    <script>
+        document.getElementById('getStartedAdminBtn').addEventListener('click', function() {
+            localStorage.setItem('openAdminLogin', '1');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+
+</html>

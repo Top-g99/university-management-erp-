@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZENED Pricing Plans</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .pricing-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem 3rem 1rem;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .pricing-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-header p {
+            color: #e0e7ff;
+            font-size: 1.15rem;
+            margin-bottom: 0;
+        }
+        
+        .pricing-cards {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .pricing-card {
+            background: #fff;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 32px 0 rgba(37, 99, 235, 0.08), 0 1.5px 8px 0 #1a3cff11;
+            padding: 2.2rem 2.2rem 2.5rem 2.2rem;
+            min-width: 270px;
+            max-width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border: 2px solid #e5e7eb;
+            transition: box-shadow 0.2s, border 0.2s;
+        }
+        
+        .pricing-card.premium {
+            border: 2.5px solid #2563eb;
+            box-shadow: 0 8px 48px 0 rgba(37, 99, 235, 0.13), 0 1.5px 8px 0 #1a3cff22;
+            background: linear-gradient(120deg, #e0e7ff 60%, #2563eb 100%);
+        }
+        
+        .pricing-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 0.7rem;
+        }
+        
+        .pricing-card.premium h2 {
+            color: #1746a0;
+        }
+        
+        .pricing-price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-card.premium .pricing-price {
+            color: #1746a0;
+        }
+        
+        .pricing-desc {
+            color: #444;
+            font-size: 1.05rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+            width: 100%;
+        }
+        
+        .pricing-features li {
+            color: #2563eb;
+            font-weight: 500;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        
+        .pricing-btn {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 1.2rem;
+            padding: 0.9rem 2.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .pricing-btn:hover {
+            background: #1746a0;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 2.5rem;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.15s;
+        }
+        
+        .back-link:hover {
+            color: #c7d2fe;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glass-bg"></div>
+    <a href="homepage.html" class="back-link" style="position:absolute; top:2rem; left:2rem; background:#2563eb; color:#fff; border-radius:1.2rem; padding:0.7rem 1.5rem; font-weight:600; text-decoration:none; font-size:1.08rem; box-shadow:0 2px 8px rgba(37,99,235,0.08); z-index:10; transition:background 0.15s;">&larr; Back to Website</a>
+    <div class="pricing-container">
+        <div class="pricing-header">
+            <h1>Select Your Plan</h1>
+            <p>Start for free, upgrade for powerful tools. Simple, transparent pricing for every institution.</p>
+        </div>
+        <div class="pricing-cards">
+            <div class="pricing-card pricing-info-panel">
+                <h2>Starter Plan</h2>
+                <div class="pricing-price">₹0<span style="font-size:1rem;font-weight:500;">/mo</span></div>
+                <div class="pricing-desc">Basic Access for small institutions and pilots.</div>
+                <ul class="pricing-features">
+                    <li><i class="fa fa-check-circle"></i> 1 Admin Account</li>
+                    <li><i class="fa fa-check-circle"></i> Admissions Management</li>
+                    <li><i class="fa fa-check-circle"></i> Fee Tracker</li>
+                    <li><i class="fa fa-check-circle"></i> Mobile Friendly</li>
+                    <li><i class="fa fa-check-circle"></i> Basic Support</li>
+                </ul>
+                <button class="pricing-btn" onclick="window.location.href='institute-signup.html'">Get Started</button>
+            </div>
+            <div class="pricing-card">
+                <h2>Professional</h2>
+                <div class="pricing-price">₹4,999<span style="font-size:1rem;font-weight:500;">/mo</span></div>
+                <div class="pricing-desc">Advanced Access for growing institutions.</div>
+                <ul class="pricing-features">
+                    <li><i class="fa fa-check-circle"></i> All Starter Features</li>
+                    <li><i class="fa fa-check-circle"></i> Analytics & Reports</li>
+                    <li><i class="fa fa-check-circle"></i> SMS Notifications</li>
+                    <li><i class="fa fa-check-circle"></i> Document Generation</li>
+                </ul>
+                <button class="pricing-btn" onclick="window.location.href='institute-signup.html'">Get Started</button>
+            </div>
+            <div class="pricing-card premium">
+                <h2>Enterprise</h2>
+                <div class="pricing-price">₹9,999<span style="font-size:1rem;font-weight:500;">/mo</span></div>
+                <div class="pricing-desc">Ultimate Access for large or custom deployments.</div>
+                <ul class="pricing-features">
+                    <li><i class="fa fa-check-circle"></i> All Professional Features</li>
+                    <li><i class="fa fa-check-circle"></i> Custom Integrations</li>
+                    <li><i class="fa fa-check-circle"></i> Dedicated Account Manager</li>
+                    <li><i class="fa fa-check-circle"></i> Priority Support</li>
+                </ul>
+                <button class="pricing-btn" onclick="window.location.href='institute-signup.html'">Get Started</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

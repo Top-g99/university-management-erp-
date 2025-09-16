@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Timetable | CampusLite</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #181A20;
+            color: #fff;
+            font-family: 'Inter', 'Roboto', Arial, sans-serif;
+        }
+        
+        .dashboard-root {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #23242B;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.2rem 1.2rem 1.2rem;
+            min-height: 100vh;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.01em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar nav {
+            flex: 1;
+        }
+        
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #bfc9da;
+            text-decoration: none;
+            font-size: 0.98rem;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.8rem;
+            margin-bottom: 0.3rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        
+        .sidebar nav a.active,
+        .sidebar nav a:hover {
+            background: #2563eb;
+            color: #fff;
+        }
+        
+        .main-content {
+            flex: 1;
+            background: #181A20;
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2.2rem;
+        }
+        
+        .dashboard-header .title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            color: #fff;
+        }
+        
+        .dashboard-header .user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .dashboard-header .user .name {
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            color: #fff;
+        }
+        
+        .timetable-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+        
+        .minimal-input {
+            background: #23242B;
+            color: #fff;
+            border: 1px solid #23242B;
+            border-radius: 0.6rem;
+            padding: 0.55rem 1.1rem;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: border 0.2s, box-shadow 0.2s;
+            box-shadow: none;
+        }
+        
+        .minimal-input:focus {
+            border: 1.5px solid #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.08);
+        }
+        
+        .minimal-input::placeholder {
+            color: #bfc9da;
+            opacity: 1;
+        }
+        
+        .timetable-table-container {
+            background: #23242B;
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 12px 0 rgba(37, 99, 235, 0.08);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        table.timetable-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+        
+        table.timetable-table th,
+        table.timetable-table td {
+            padding: 0.7rem 1rem;
+            text-align: center;
+        }
+        
+        table.timetable-table th {
+            background: #181A20;
+            color: #bfc9da;
+            font-weight: 600;
+        }
+        
+        table.timetable-table tr {
+            border-bottom: 1px solid #23242B;
+        }
+        
+        table.timetable-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        table.timetable-table td {
+            color: #fff;
+        }
+        
+        .edit-cell {
+            background: #181A20;
+            border: 1px solid #23242B;
+            border-radius: 0.4rem;
+            color: #fff;
+            padding: 0.3rem 0.5rem;
+            font-size: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .edit-cell:focus {
+            border: 1.5px solid #2563eb;
+            outline: none;
+        }
+        
+        .upload-btn,
+        .show-past-btn {
+            background: #2563eb;
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            border-radius: 0.8rem;
+            padding: 0.7rem 2.2rem;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-right: 0.7rem;
+        }
+        
+        .upload-btn:hover,
+        .show-past-btn:hover {
+            background: #1d4ed8;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                padding: 1.2rem 0.5rem;
+            }
+            .timetable-table-container {
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .timetable-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.7rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-root">
+        <aside class="sidebar">
+            <div class="logo" style="display:flex; align-items:center; gap:0.7rem;">
+                <span class="zened-logo-svg" style="display:flex; align-items:center;">
+                    <svg width="38" height="38" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="22" fill="#2563eb" stroke="#fff" stroke-width="4"/>
+                        <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="'Poppins', 'Inter', Arial, sans-serif" font-size="22" font-weight="bold" dy=".3em">Z</text>
+                    </svg>
+                </span>
+                <span class="brand-title" style="font-size:1.3rem; font-weight:500; color:#fff; letter-spacing:0.01em;">ZEN<span class="accent" style="color:#2563eb;">ED</span></span>
+            </div>
+            <nav>
+                <a href="teacher-dashboard.html"><i class="fa fa-th-large"></i> Dashboard</a>
+                <a href="teacher-attendance.html"><i class="fa fa-user-check"></i> Attendance</a>
+                <a href="teacher-timetable.html" class="active"><i class="fa fa-calendar-plus"></i> Timetable Upload</a>
+                <a href="teacher-notifications.html"><i class="fa fa-bell"></i> Notifications</a>
+                <a href="teacher-reports.html"><i class="fa fa-chart-bar"></i> Reports</a>
+                <a href="index.html"><i class="fa fa-sign-out-alt"></i> Logout</a>
+            </nav>
+            <a href="contact-support.html" style="margin-top:auto; background:#2563eb; color:#fff; font-weight:600; border-radius:0.9rem; text-align:center; padding:0.45rem 0; font-size:1.01rem; display:block;"><i class="fa fa-headset"></i> Contact Support</a>
+        </aside>
+        <main class="main-content">
+            <div class="dashboard-header" style="background:#282A36; border-radius:1.2rem; padding:1.2rem 2rem; margin-bottom:2.2rem; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 12px 0 rgba(37,99,235,0.08);">
+                <div class="title">Timetable Upload</div>
+                <div class="user" style="gap:0.7rem; display:flex; align-items:center;">
+                    <i class="fa fa-bell" style="font-size:1.5rem; color:#facc15; cursor:pointer; background:#23242B; border-radius:50%; width:2.4rem; height:2.4rem; display:flex; align-items:center; justify-content:center;"></i>
+                    <i class="fa fa-user-circle" style="font-size:2.2rem; color:#bfc9da;"></i>
+                    <div class="name" style="font-size:1.08rem; color:#bfc9da;">Teacher</div>
+                </div>
+            </div>
+            <div class="timetable-controls">
+                <label for="timetable-upload" class="upload-btn" tabindex="0"><i class="fa fa-upload"></i> Upload Timetable</label>
+                <input type="file" id="timetable-upload" class="file-input" accept=".csv,.xlsx,.xls">
+                <button class="show-past-btn" onclick="showPastTimetables()"><i class="fa fa-history"></i> Show Past Timetables</button>
+            </div>
+            <div class="timetable-table-container">
+                <table class="timetable-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Period 1</th>
+                            <th>Period 2</th>
+                            <th>Period 3</th>
+                            <th>Period 4</th>
+                            <th>Period 5</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timetable-tbody">
+                        <!-- Timetable rows will be inserted here by JS -->
+                    </tbody>
+                </table>
+                <div id="timetable-status" style="margin-top:1rem; font-weight:500;"></div>
+            </div>
+        </main>
+    </div>
+    <script>
+        // Example static timetable data
+        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const periods = 5;
+        let timetable = [
+            ['Math', 'Science', 'English', 'PE', 'Art'],
+            ['English', 'Math', 'Science', 'History', 'PE'],
+            ['Science', 'English', 'Math', 'Art', 'History'],
+            ['Math', 'Science', 'English', 'PE', 'Art'],
+            ['English', 'Math', 'Science', 'History', 'PE'],
+            ['Science', 'English', 'Math', 'Art', 'History']
+        ];
+
+        function renderTimetable() {
+            const tbody = document.getElementById('timetable-tbody');
+            tbody.innerHTML = '';
+            days.forEach((day, i) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${day}</td>` + timetable[i].map((subject, j) =>
+                    `<td><input class='edit-cell' value='${subject}' data-day='${i}' data-period='${j}'></td>`
+                ).join('');
+                tbody.appendChild(tr);
+            });
+        }
+        renderTimetable();
+        // Inline editing
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('edit-cell')) {
+                const day = e.target.getAttribute('data-day');
+                const period = e.target.getAttribute('data-period');
+                timetable[day][period] = e.target.value;
+                document.getElementById('timetable-status').textContent = 'Timetable updated (not saved to server)';
+            }
+        });
+        // Upload handler (mock)
+        document.getElementById('timetable-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('timetable-status').textContent = `Uploaded: ${file.name} (parsing not implemented)`;
+            }
+        });
+        // Show past timetables (mock)
+        function showPastTimetables() {
+            alert('Show past timetables feature coming soon!');
+        }
+    </script>
+</body>
+
+</html>

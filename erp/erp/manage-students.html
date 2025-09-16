@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Students | ZENED ERP</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            background: #f5f6fa;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            color: #23242B;
+            margin: 0;
+        }
+        
+        .dashboard-root {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.2rem 1.2rem 1.2rem;
+            min-height: 100vh;
+            box-shadow: 2px 0 16px 0 #2563eb11;
+            border-right: 1.5px solid #e5e7eb;
+        }
+        
+        .sidebar .logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #2563eb;
+            margin-bottom: 2.2rem;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .institution-name {
+            font-size: 1.08rem;
+            font-weight: 600;
+            margin-bottom: 2.2rem;
+            opacity: 0.92;
+            color: #1746a0;
+        }
+        
+        .sidebar nav {
+            flex: 1;
+        }
+        
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 1.08rem;
+            font-weight: 500;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.8rem;
+            margin-bottom: 0.3rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        
+        .sidebar nav a.active,
+        .sidebar nav a:hover {
+            background: #2563eb;
+            color: #fff;
+        }
+        
+        .sidebar .logout {
+            margin-top: 2rem;
+            color: #fff;
+            background: #2563eb;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            padding: 0.7rem 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .sidebar .logout:hover {
+            background: #1746a0;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 2.5rem 3.5vw;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        
+        .header-row h2 {
+            font-size: 1.5rem;
+            color: #1746a0;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .add-btn {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.7rem 1.7rem;
+            font-size: 1.08rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .add-btn:hover {
+            background: #1746a0;
+        }
+        
+        .students-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+            overflow: hidden;
+        }
+        
+        .students-table th,
+        .students-table td {
+            padding: 1rem 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .students-table th {
+            background: #f7faff;
+            color: #2563eb;
+            font-size: 1.08rem;
+            font-weight: 700;
+        }
+        
+        .students-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .students-table td .remove-btn {
+            background: #fff;
+            color: #e11d48;
+            border: 1.5px solid #e11d48;
+            border-radius: 6px;
+            padding: 0.3rem 0.9rem;
+            font-size: 0.98rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+        
+        .students-table td .remove-btn:hover {
+            background: #e11d48;
+            color: #fff;
+        }
+        
+        .students-table td .student-link {
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .add-student-form {
+            display: none;
+            flex-direction: column;
+            gap: 1.1rem;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(37, 99, 235, 0.07);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            max-width: 400px;
+        }
+        
+        .add-student-form input {
+            padding: 0.7rem 1rem;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .add-student-form button {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.7rem 1.7rem;
+            font-size: 1.08rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .add-student-form button:hover {
+            background: #1746a0;
+        }
+        
+        @media (max-width: 900px) {
+            .dashboard-root {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100vw;
+                flex-direction: row;
+                align-items: center;
+                padding: 1.2rem 0.5rem;
+                gap: 1.5rem;
+                min-height: unset;
+                border-right: none;
+                border-bottom: 1.5px solid #e5e7eb;
+            }
+            .sidebar nav {
+                flex-direction: row;
+                gap: 1.2rem;
+            }
+            .sidebar .logout {
+                margin-top: 0;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 1.2rem 2vw;
+            }
+            .students-table th,
+            .students-table td {
+                padding: 0.7rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-root">
+        <aside class="sidebar">
+            <div class="logo" style="display:flex; align-items:center; gap:0.7rem;">
+                <span class="zened-logo-svg" style="display:flex; align-items:center;">
+          <svg width="38" height="38" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" fill="#2563eb" stroke="#fff" stroke-width="4"/>
+            <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="'Poppins', 'Inter', Arial, sans-serif" font-size="22" font-weight="bold" dy=".3em">Z</text>
+          </svg>
+        </span>
+                <span class="brand-title" style="font-family:'Poppins', 'Inter', Arial, sans-serif; font-weight:700; font-size:1.7rem; color:#1a3cff; letter-spacing:0.04em;">ZEN<span class="accent" style="color:#2563eb; font-family:inherit;">ED</span></span>
+            </div>
+            <div class="institution-name" id="institutionNameSidebar"></div>
+            <nav>
+                <a href="admin-dashboard.html"><i class="fa fa-home"></i> Dashboard</a>
+                <a href="manage-students.html" class="active"><i class="fa fa-users"></i> Manage Students</a>
+                <a href="manage-teachers.html"><i class="fa fa-chalkboard-teacher"></i> Manage Teachers</a>
+                <a href="#"><i class="fa fa-chart-bar"></i> Reports</a>
+                <a href="#"><i class="fa fa-cog"></i> Settings</a>
+            </nav>
+            <button class="logout"><i class="fa fa-sign-out-alt"></i> Logout</button>
+        </aside>
+        <main class="main-content">
+            <div class="header-row">
+                <h2>Manage Students</h2>
+                <button class="add-btn" id="showAddStudentForm"><i class="fa fa-plus"></i> Add Student</button>
+            </div>
+            <form class="add-student-form" id="addStudentForm">
+                <input type="text" id="studentName" placeholder="Student Name" required>
+                <input type="text" id="studentRoll" placeholder="Roll Number" required>
+                <input type="email" id="studentEmail" placeholder="Email" required>
+                <button type="submit">Add Student</button>
+            </form>
+            <table class="students-table" id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll No</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </main>
+    </div>
+    <script>
+        // Sidebar institution name
+        document.getElementById('institutionNameSidebar').textContent = localStorage.getItem('institutionName') || 'Your Institution';
+        // Demo localStorage for students
+        function getStudents() {
+            return JSON.parse(localStorage.getItem('students') || '[]');
+        }
+
+        function setStudents(students) {
+            localStorage.setItem('students', JSON.stringify(students));
+        }
+
+        function renderStudents() {
+            const students = getStudents();
+            const tbody = document.querySelector('#studentsTable tbody');
+            tbody.innerHTML = '';
+            students.forEach((s, i) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td><span class="student-link" data-index="${i}">${s.name}</span></td><td>${s.roll}</td><td>${s.email}</td><td><button class="remove-btn" data-index="${i}">Remove</button></td>`;
+                tbody.appendChild(tr);
+            });
+        }
+        renderStudents();
+        // Add student
+        document.getElementById('showAddStudentForm').onclick = function() {
+            document.getElementById('addStudentForm').style.display = 'flex';
+        };
+        document.getElementById('addStudentForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('studentName').value.trim();
+            const roll = document.getElementById('studentRoll').value.trim();
+            const email = document.getElementById('studentEmail').value.trim();
+            if (!name || !roll || !email) return;
+            const students = getStudents();
+            students.push({
+                name,
+                roll,
+                email
+            });
+            setStudents(students);
+            renderStudents();
+            this.reset();
+            this.style.display = 'none';
+        };
+        // Remove student
+        document.querySelector('#studentsTable').onclick = function(e) {
+            if (e.target.classList.contains('remove-btn')) {
+                const idx = +e.target.getAttribute('data-index');
+                const students = getStudents();
+                students.splice(idx, 1);
+                setStudents(students);
+                renderStudents();
+            }
+            if (e.target.classList.contains('student-link')) {
+                const idx = +e.target.getAttribute('data-index');
+                localStorage.setItem('selectedStudentIndex', idx);
+                window.location.href = 'student-info.html';
+            }
+        };
+    </script>
+</body>
+
+</html>

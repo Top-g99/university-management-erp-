@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up as an Institute | ZENED ERP</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: #02040a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        }
+        
+        .signup-main-card {
+            display: flex;
+            width: 900px;
+            max-width: 98vw;
+            min-height: 520px;
+            background: #fff;
+            border-radius: 2rem;
+            box-shadow: 0 8px 48px 0 rgba(37, 99, 235, 0.13), 0 1.5px 8px 0 #1a3cff22;
+            overflow: hidden;
+        }
+        
+        .signup-left {
+            flex: 1.1;
+            background: url('https://i.pinimg.com/1200x/fa/b3/c9/fab3c983327b727ccbe647d39b05c846.jpg') center center / cover no-repeat;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 3.5rem 2.5rem 3.5rem 2.8rem;
+            position: relative;
+        }
+        
+        .signup-left::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+        
+        .signup-left>* {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .signup-left .zened-logo {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+        }
+        
+        .signup-left .welcome-title {
+            font-size: 2.1rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .signup-left .welcome-headline {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+            opacity: 0.95;
+        }
+        
+        .signup-left .welcome-desc {
+            font-size: 1rem;
+            opacity: 0.85;
+            line-height: 1.6;
+            max-width: 320px;
+        }
+        
+        .signup-left .circle-bg1,
+        .signup-left .circle-bg2 {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            z-index: 0;
+        }
+        
+        .signup-left .circle-bg1 {
+            width: 180px;
+            height: 180px;
+            left: -60px;
+            bottom: -60px;
+        }
+        
+        .signup-left .circle-bg2 {
+            width: 110px;
+            height: 110px;
+            right: -40px;
+            top: -40px;
+        }
+        
+        .signup-right {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2.5rem 2.2rem;
+            background: #fff;
+            position: relative;
+        }
+        
+        .signup-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #222831;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .signup-form {
+            width: 100%;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        .signup-form .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .signup-form .input-group i {
+            position: absolute;
+            left: 14px;
+            color: #2563eb;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+        
+        .signup-form input,
+        .signup-form textarea {
+            width: 100%;
+            padding: 11px 12px 11px 38px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f7faff;
+            transition: border 0.2s;
+            margin-bottom: 0;
+        }
+        
+        .signup-form textarea {
+            padding-left: 38px;
+            resize: vertical;
+        }
+        
+        .signup-form input:focus,
+        .signup-form textarea:focus {
+            border: 1.5px solid #2563eb;
+            outline: none;
+            background: #fff;
+        }
+        
+        .show-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #2563eb;
+            font-size: 0.98rem;
+            cursor: pointer;
+            font-weight: 600;
+            padding: 0 4px;
+        }
+        
+        .signup-form button[type="submit"] {
+            background: #2563eb;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            padding: 13px 0;
+            margin-top: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px 0 #2563eb22;
+        }
+        
+        .signup-form button[type="submit"]:hover {
+            background: #1746a0;
+        }
+        
+        .login-link {
+            margin-top: 18px;
+            font-size: 0.98rem;
+            color: #666;
+            text-align: center;
+        }
+        
+        .login-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 900px) {
+            .signup-main-card {
+                flex-direction: column;
+                width: 98vw;
+                min-width: 0;
+                min-height: 0;
+            }
+            .signup-left,
+            .signup-right {
+                flex: unset;
+                width: 100%;
+                min-width: 0;
+                min-height: 0;
+                border-radius: 0;
+                padding: 2.2rem 1.2rem;
+            }
+            .signup-left {
+                align-items: center;
+                text-align: center;
+                padding-bottom: 1.2rem;
+            }
+            .signup-left .welcome-desc {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .signup-main-card {
+                width: 100vw;
+                border-radius: 0;
+            }
+            .signup-left,
+            .signup-right {
+                padding: 1.2rem 0.5rem;
+            }
+            .signup-form {
+                max-width: 100vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="signup-main-card">
+        <div class="signup-left">
+            <div class="zened-logo" style="display:flex; align-items:center; gap:0.7rem;">
+                <span class="zened-logo-svg" style="display:flex; align-items:center;">
+          <svg width="38" height="38" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="22" fill="#2563eb" stroke="#fff" stroke-width="4"/>
+            <text x="50%" y="58%" text-anchor="middle" fill="#fff" font-family="'Poppins', 'Inter', Arial, sans-serif" font-size="22" font-weight="bold" dy=".3em">Z</text>
+          </svg>
+        </span>
+                <span class="brand-title" style="font-family:'Poppins', 'Inter', Arial, sans-serif; font-weight:700; font-size:1.7rem; color:#1a3cff; letter-spacing:0.04em;">ZEN<span class="accent" style="color:#2563eb; font-family:inherit;">ED</span></span>
+            </div>
+            <div class="welcome-title">WELCOME</div>
+            <div class="welcome-headline">Your Institution’s Digital Future Starts Here</div>
+            <div class="welcome-desc">
+                Join ZENED ERP and experience seamless, modern campus management. Sign up your institute for free and unlock powerful tools for admissions, attendance, fees, and more.
+            </div>
+            <div class="circle-bg1"></div>
+            <div class="circle-bg2"></div>
+        </div>
+        <div class="signup-right">
+            <div class="signup-title">Sign Up as an Institute</div>
+            <form class="signup-form" id="instituteSignupForm" autocomplete="off">
+                <div class="input-group">
+                    <i class="fa fa-university"></i>
+                    <input type="text" id="instituteName" name="instituteName" placeholder="Institute Name" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-user"></i>
+                    <input type="text" id="adminName" name="adminName" placeholder="Admin Name">
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="Email">
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-phone"></i>
+                    <input type="tel" id="phone" name="phone" placeholder="Phone" pattern="[0-9]{10,15}">
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-map-marker-alt"></i>
+                    <textarea id="address" name="address" rows="2" placeholder="Address"></textarea>
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" minlength="6">
+                    <button class="show-password" type="button" onclick="togglePassword('password', this)">Show</button>
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" minlength="6">
+                    <button class="show-password" type="button" onclick="togglePassword('confirmPassword', this)">Show</button>
+                </div>
+                <button type="submit">Create Institute Account</button>
+            </form>
+            <div class="login-link">
+                Already have an account? <a href="index.html">Log in</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Show/hide password toggle
+        function togglePassword(fieldId, btn) {
+            const field = document.getElementById(fieldId);
+            if (field.type === 'password') {
+                field.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                field.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
+        // Basic client-side validation for password match
+        document.getElementById('instituteSignupForm').addEventListener('submit', function(e) {
+            var pwd = document.getElementById('password').value;
+            var cpwd = document.getElementById('confirmPassword').value;
+            var instName = document.getElementById('instituteName').value.trim();
+            // Only check password match if both fields are filled
+            if (pwd && cpwd && pwd !== cpwd) {
+                alert('Passwords do not match.');
+                e.preventDefault();
+            } else {
+                e.preventDefault();
+                if (instName) {
+                    localStorage.setItem('institutionName', instName);
+                }
+                window.location.href = 'admin-dashboard.html';
+            }
+        });
+
+        document.getElementById('instituteName').addEventListener('input', function(e) {
+            const newName = e.target.value.trim();
+            localStorage.setItem('institutionName', newName);
+        });
+    </script>
+</body>
+
+</html>
